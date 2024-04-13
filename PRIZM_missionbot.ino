@@ -13,9 +13,6 @@ void setup(){
   battVoltagePrint();
   linetrace_analogSetting(3.0, 60, 40, 35);
 
-  // ptrCurrentMode = move_StartBoost;
-  ptrCurrentMode = check_NODE59;
-
   Serial.print("\n\n[[[Setup Finish]]]\n\n");    // 세팅완료 메시지
 }
 
@@ -23,5 +20,6 @@ void loop() {
   // battVoltagePrint(1000);
   // setBattVoltage2(12.8);
   // canGrab();
-  ptrCurrentMode();
+  move_StartPos();
+  StopFor(1000000);
 }

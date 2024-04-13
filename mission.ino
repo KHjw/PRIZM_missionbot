@@ -55,21 +55,19 @@ void Get_Avoid_Return(int target_id, int false_id, int return_color){
 //****************************** initial movement ******************************
 void move_StartBoost(){
   GoForward(80, 700);
-  ptrCurrentMode = move_StartPos;
 }
 
 void move_StartPos(){
-  intersectionDETECT();
-  if(intersectionCNT < 1){
+  GoForward(80, 700);
+  while(intersectionCNT < 1){
+    intersectionDETECT();
     Serial.print(".");
     linetrace_analog();
   }
-  else{
-    currentNODE = NODE1;
-    currnetNEWS = NORTH;
-    intersectionCNT = 0;
-    NODE_movement("5");
-  }
+  currentNODE = NODE1;
+  currnetNEWS = NORTH;
+  intersectionCNT = 0;
+  NODE_movement("2,6");
 }
 
 //****************************** mission func ******************************
