@@ -52,8 +52,7 @@ void canGrab();
 void TurnRignt();
 void TurnLeft();
 void GoForward(int velocity, int time);
-void StopFor(long time);
-void Wait();
+void StopFor(unsigned long  time);
 
 //****************************** nodemove SETUP ******************************
 enum {NORTH = 0, EAST, SOUTH, WEST};

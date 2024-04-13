@@ -18,10 +18,8 @@ void NODE_dataPrint(int nodeNUM){
 }
 
 void NODE_dataUpdate(int nodeNUM, int data){
-  Serial.print("NODE data updating...");
   NODE_to_Arr(nodeNUM, row, col);
   nodeDataArr[row][col] = data;
-  Serial.println("   complete");
   NODE_dataPrint(nodeNUM);
 }
 
@@ -59,28 +57,41 @@ int NODE_convert(int node_num){
   }
 }
 
+void NODE_PrintAll(){
+  Serial.println("\nNODE DATA PRINT");
+  for(int i=0; i<3; i++){
+    for(int j=0; j<3; j++){
+      String node_data = (String)(nodeDataArr[i][j]);
+      if(node_data == "7") node_data = "?";
+      Serial.print(node_data);
+      if(j<2) Serial.print(" . ");
+    }
+    Serial.println("");
+  }
+}
+
 //****************************** NODE move ******************************
 void NODE_move(int to){
   NODE_move(currentNODE, to);
 }
 
 void NODE_move(int from, int to){
-  Serial.print("NODE_move / ");
-  int from_row = 0, from_col = 0, to_row = 0, to_col = 0;
-
+  // 행렬 정보 임시 저장
   NODE_to_Arr(from, row, col);
-  from_row = row;
-  from_col = col;
-  Serial.print("from:"+(String)(from_row)+","+(String)(from_col)+" / ");
+  int from_row = row;
+  int from_col = col;
   NODE_to_Arr(to, row, col);
-  to_row = row;
-  to_col = col;
-  Serial.print("to:"+(String)(to_row)+","+(String)(to_col)+" / ");
-
+  int to_row = row;
+  int to_col = col;
+  // 행렬 움직임 계산
   int row_move = from_row-to_row;
   int col_move = to_col-from_col;
+  // 디버깅용 정보 출력
+  Serial.print("NODE_move / ");
+  Serial.print("from:"+(String)(from_row)+","+(String)(from_col)+" / ");
+  Serial.print("to:"+(String)(to_row)+","+(String)(to_col)+" / ");
   Serial.println(row_move*10 + col_move);
-  
+  // 현재 위치를 도착지로 갱신
   currentNODE = to;
   switch(row_move*10 + col_move){
     case 00:
@@ -145,6 +156,10 @@ void NODE_movement(String input){
     moveArr[i] = 0;
 }
 
+void NODE_movementGrab(String input){
+
+}
+
 void movement_parsing(String input){
   int index = 0;  // 배열 인덱스 초기화
 
@@ -180,7 +195,7 @@ void move_right(){
 
 void move_left(){
   StopFor(200);
-  GoForward(60, 300);
+  GoForward(60, 380);
   TurnLeft();
   StopFor(700);
 }
@@ -190,19 +205,4 @@ void move_180(){
   GoForward(60, 400);
   TurnAround();
   StopFor(700);
-}
-
-//****************************** NODE info ******************************
-void NODE_PrintAll(){
-  Serial.println("\nNODE DATA PRINT");
-  for(int i=0; i<3; i++){
-    for(int j=0; j<3; j++){
-      String node_data = (String)(nodeDataArr[i][j]);
-      if(node_data == "7") node_data = "?";
-      Serial.print(node_data);
-      if(j<2) Serial.print(" . ");
-    }
-    Serial.println("");
-  }
-  ptrCurrentMode = Wait;
 }

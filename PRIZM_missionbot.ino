@@ -20,6 +20,6 @@ void loop() {
   // battVoltagePrint(1000);
   // setBattVoltage2(12.8);
   // canGrab();
-  move_StartPos();
-  StopFor(1000000);
+
+  MissionStart();
 }

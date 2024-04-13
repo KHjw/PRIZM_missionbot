@@ -71,7 +71,7 @@ void linetrace_analogSetting(float gainData, int default_speedData, int irDataMA
 void intersectionDETECT(){
   if(prizm.readLineSensor(2) == 1){   // 검정에 닿았을 때
     intersectionCNT++;
-    Serial.print("\n\n[[[intersectionDETECT]]] intersectionCNT : " + (String)(intersectionCNT)+"\n\n");    // digitalDETECT 출력
+    Serial.println("[[[intersectionDETECT]]] intersectionCNT : " + (String)(intersectionCNT));    // digitalDETECT 출력
     GoForward(60, 15);
   }
   delay(20);

@@ -6,7 +6,7 @@ void huskeylensInit(){
   }
 }
 
-void check_1NODE_72(){
+void check_1NODE_Far(){
   int sonic_data = 0;
   int checkNUM = 3;
   for(int i=0; i<checkNUM; i++){
@@ -14,8 +14,8 @@ void check_1NODE_72(){
     delay(100);
   } 
   sonic_data = sonic_data/checkNUM;
-  Serial.print("sonic data : "+(String)(sonic_data)+" / ");
-  if(66 < sonic_data && sonic_data <= 80){
+  Serial.println("sonic data : "+(String)(sonic_data));
+  if(48 < sonic_data && sonic_data <= 58){
     if(isObjectTarget())  NODE_dataUpdate(NODE3, 1);
     else                  NODE_dataUpdate(NODE3, 2);
   }
@@ -23,7 +23,7 @@ void check_1NODE_72(){
     NODE_dataUpdate(NODE3, 0);
 }
 
-void check_1NODE_15(){
+void check_1NODE_Near(){
   int sonic_data = 0;
   int checkNUM = 3;
   for(int i=0; i<checkNUM; i++){
@@ -31,7 +31,7 @@ void check_1NODE_15(){
     delay(100);
   } 
   sonic_data = sonic_data/checkNUM;
-  Serial.print("sonic data : "+(String)(sonic_data)+" / ");
+  Serial.println("sonic data : "+(String)(sonic_data));
   if(11 < sonic_data && sonic_data <= 19){
     if(isObjectTarget())  NODE_dataUpdate(NODE7, 1);
     else                  NODE_dataUpdate(NODE7, 2);
@@ -48,7 +48,7 @@ void check_2NODE(int node_near, int node_far){
     delay(100);
   } 
   sonic_data = sonic_data/checkNUM;
-  Serial.print("sonic data : "+(String)(sonic_data)+" / ");
+  Serial.println("sonic data : "+(String)(sonic_data));
   if(11 < sonic_data && sonic_data <= 19){
     if(isObjectTarget())  NODE_dataUpdate(node_near, 1);
     else                  NODE_dataUpdate(node_near, 2);

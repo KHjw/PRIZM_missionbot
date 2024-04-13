@@ -39,40 +39,46 @@ void canGrab(){
 
 //****************************** move mode ******************************
 void TurnRignt(){
-  Serial.println("TurnRignt");
   prizm.setMotorPowers(40, -40);
   delay(750);
   prizm.setMotorPowers(125, 125);   // 정지
+  TurnCalib();
 }
 
 void TurnLeft(){
-  Serial.println("TurnLeft");
   prizm.setMotorPowers(-40, 40);
   delay(750);
   prizm.setMotorPowers(125, 125);   // 정지
+  TurnCalib();
 }
 
 void TurnAround(){
-  Serial.println("TurnAround");
   prizm.setMotorPowers(100, -100);
   delay(1050);
   prizm.setMotorPowers(125, 125);   // 정지
+  TurnCalib();
 }
 
 void GoForward(int velocity, int time){
-  Serial.println("GoForward");
   prizm.setMotorPowers(velocity, velocity);
   delay(time);
 }
 
-void StopFor(long time){
+void StopFor(unsigned long time){
   prizm.setMotorPowers(125, 125);   // 정지
   delay(time);
 }
 
-void Wait(){
-  prizm.setMotorPowers(125, 125);   // 정지
-  ptrCurrentMode = voidFunc;
+void TurnCalib(){
+  StopFor(50);
+  intersectionDETECT();
+  if(intersectionCNT > 0){
+    Serial.println("TurnCalib");
+    prizm.setMotorPowers(40, -40);
+    delay(50);
+    StopFor(50);
+  }
+  intersectionCNT = 0;
 }
 
 //****************************** return home ******************************
