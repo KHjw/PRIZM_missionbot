@@ -13,8 +13,11 @@ void NODE_dataPrint(int nodeNUM){
   NODE_to_Arr(nodeNUM, row, col);
   int nodeNum_data = nodeNumArr[row][col];
   int nodeData_data = nodeDataArr[row][col];
-  Serial.print("[[NODE"+(String)(nodeNum_data));
-  Serial.println(" data : "+(String)(nodeData_data)+" ]]");
+  Serial.print(F("[[NODE"));
+  Serial.print(nodeNum_data);
+  Serial.print(F(" data : "));
+  Serial.print(nodeData_data);
+  Serial.println(F(" ]]"));
 }
 
 void NODE_dataUpdate(int nodeNUM, int data){
@@ -27,44 +30,35 @@ int NODE_convert(int node_num){
   switch (node_num){
   case 1:
     return NODE1;
-    break;
   case 2:
     return NODE2;
-    break;
   case 3:
     return NODE3;
-    break;
   case 5:
     return NODE5;
-    break;
   case 6:
     return NODE6;
-    break;
   case 7:
     return NODE7;
-    break;
   case 9:
     return NODE9;
-    break;
   case 10:
     return NODE10;
-    break;
   case 11:
     return NODE11;
-    break;
   default:
-    break;
+    return 0; // Added default return value
   }
 }
 
 void NODE_PrintAll(){
-  Serial.println("\nNODE DATA PRINT");
+  Serial.println(F("\nNODE DATA PRINT"));
   for(int i=0; i<3; i++){
     for(int j=0; j<3; j++){
-      String node_data = (String)(nodeDataArr[i][j]);
+      String node_data = String(nodeDataArr[i][j]);
       if(node_data == "7") node_data = "?";
       Serial.print(node_data);
-      if(j<2) Serial.print(" . ");
+      if(j<2) Serial.print(F(" . "));
     }
     Serial.println("");
   }
@@ -76,42 +70,44 @@ void NODE_move(int to){
 }
 
 void NODE_move(int from, int to){
-  // 행렬 정보 임시 저장
   NODE_to_Arr(from, row, col);
   int from_row = row;
   int from_col = col;
   NODE_to_Arr(to, row, col);
   int to_row = row;
   int to_col = col;
-  // 행렬 움직임 계산
   int row_move = from_row-to_row;
   int col_move = to_col-from_col;
-  // 디버깅용 정보 출력
-  Serial.print("NODE_move / ");
-  Serial.print("from:"+(String)(from_row)+","+(String)(from_col)+" / ");
-  Serial.print("to:"+(String)(to_row)+","+(String)(to_col)+" / ");
+  Serial.print(F("NODE_move / from:"));
+  Serial.print(from_row);
+  Serial.print(F(","));
+  Serial.print(from_col);
+  Serial.print(F(" / to:"));
+  Serial.print(to_row);
+  Serial.print(F(","));
+  Serial.print(to_col);
+  Serial.print(F(" / "));
   Serial.println(row_move*10 + col_move);
-  // 현재 위치를 도착지로 갱신
   currentNODE = to;
   switch(row_move*10 + col_move){
     case 00:
-      Serial.println("move : stay");
+      Serial.println(F("move : stay"));
       StopFor(100000);
       break;
     case 01:
-      Serial.println("move : EAST");
+      Serial.println(F("move : EAST"));
       move_NEWS(EAST);
       break;
     case -01:
-      Serial.println("move : WEST");
+      Serial.println(F("move : WEST"));
       move_NEWS(WEST);
       break;
     case 10:
-      Serial.println("move : NORTH");
+      Serial.println(F("move : NORTH"));
       move_NEWS(NORTH);
       break;
     case -10:
-      Serial.println("move : SOUTH");
+      Serial.println(F("move : SOUTH"));
       move_NEWS(SOUTH);
       break;
     default:
@@ -138,7 +134,7 @@ void move_NEWS(int news){
       break;
   }
   currnetNEWS = news;
-  Serial.println("move_1node");
+  Serial.println(F("move_1node"));
   move_1node();
 }
 
@@ -147,7 +143,8 @@ void NODE_movement(String input){
   movement_parsing(input);
   int movetotalCNT = moveCNT;
   while(moveCNT > 0){
-    Serial.println("moveCNT:"+(String)(moveCNT));
+    Serial.print(F("moveCNT:"));
+    Serial.println(moveCNT);
     int moveto = moveArr[movetotalCNT - moveCNT];
     NODE_move(NODE_convert(moveto));
     moveCNT--;
@@ -189,7 +186,7 @@ void move_1node(){
 void move_right(){
   StopFor(200);
   GoForward(60, 450);
-  TurnRignt();
+  TurnRight();
   StopFor(700);
 }
 

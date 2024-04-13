@@ -30,7 +30,7 @@ void canGrab(){
   if(!isCanGrab){
     if(prizm.readSonicSensorCM(4) <= canDetectCm){
       prizm.setMotorPowers(125,125);  // 정지
-      Serial.println("Can Detected!!!");
+      Serial.println(F("Can Detected!!!"));
       gripper_moveUP(2000);
       isCanGrab = true;
     }
@@ -38,7 +38,7 @@ void canGrab(){
 }
 
 //****************************** move mode ******************************
-void TurnRignt(){
+void TurnRight(){
   prizm.setMotorPowers(40, -40);
   delay(750);
   prizm.setMotorPowers(125, 125);   // 정지
@@ -73,7 +73,7 @@ void TurnCalib(){
   StopFor(50);
   intersectionDETECT();
   if(intersectionCNT > 0){
-    Serial.println("TurnCalib");
+    Serial.println(F("TurnCalib"));
     prizm.setMotorPowers(40, -40);
     delay(50);
     StopFor(50);

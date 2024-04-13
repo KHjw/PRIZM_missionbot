@@ -3,58 +3,61 @@ void Get_Avoid_Return(int target_id, int false_id, int return_color){
   false_object = false_id;
   return_to = return_color;
 
-  Serial.print("Mission Data Receved :: ");
-  Serial.print("[ Target : ");
+  Serial.print(F("Mission Data Receved :: "));
+  Serial.print(F("[ Target : "));
   switch (target_object){
   case COLA:
-    Serial.print("COLA");
+    Serial.print(F("COLA"));
+    // servo_maxDEG = 54;
     break;
   case MONSTER:
-    Serial.print("MONSTER");
+    Serial.print(F("MONSTER"));
+    // servo_maxDEG = 54;
     break;
   case TEA:
-    Serial.print("TEA");
+    Serial.print(F("TEA"));
+    // servo_maxDEG = 54;
     break;
   default:
-    Serial.print("???");
+    Serial.print(F("???"));
     break;
   }
-  Serial.print(" / Avoid : ");
+  Serial.print(F(" / Avoid : "));
   switch (false_object){
   case COLA:
-    Serial.print("COLA");
+    Serial.print(F("COLA"));
     break;
   case MONSTER:
-    Serial.print("MONSTER");
+    Serial.print(F("MONSTER"));
     break;
   case TEA:
-    Serial.print("TEA");
+    Serial.print(F("TEA"));
     break;
   default:
-    Serial.print("???");
+    Serial.print(F("???"));
     break;
   }
-  Serial.print(" / Return to : ");
-  switch (false_object){
+  Serial.print(F(" / Return to : "));
+  switch (return_color){
   case GREEN:
-    Serial.print("GREEN");
+    Serial.print(F("GREEN"));
     break;
   case RED:
-    Serial.print("RED");
+    Serial.print(F("RED"));
     break;
   case BLUE:
-    Serial.print("BLUE");
+    Serial.print(F("BLUE"));
     break;
   default:
-    Serial.print("???");
+    Serial.print(F("???"));
     break;
   }
-  Serial.println(" ]");
+  Serial.println(F(" ]"));
 }
 
 //****************************** mission func ******************************
 void MissionStart(){
-  Serial.println("Mission Start!!!");
+  Serial.println(F("Mission Start!!!"));
   move_StartPos();
   check_NODE3();
   NODE_PrintAll();
@@ -66,24 +69,26 @@ void move_StartPos(){
   move_1node();             // NODE1 으로 이동
   currentNODE = NODE1;      // 현재 위치 저장
   currnetNEWS = NORTH;      // 현재 방향 저장
-  Serial.println(">>> At Starting Position");
+  Serial.println(F(">>> At Starting Position"));
   StopFor(100);
 }
 
 void check_NODE3(){
   GoForward(100, 500);
-  Serial.println(">>> CHECK FUNC :: check_NODE3");
+  Serial.println(F(">>> CHECK FUNC :: check_NODE3"));
   StopFor(0);
   check_1NODE_Far();
-  switch (NODE_dataReturn(NODE1)){
+  switch (NODE_dataReturn(NODE3)){
   case 1:
-    // exit 0 (2,3,2)
+    Serial.println(F("NODE3 1"));
+    NODE_movement("2,3,2");
     break;
   case 2:
-    // exit new5 (2,6,7,11,10,9,5)
+    Serial.println(F("NODE3 2"));
+    NODE_movement("2,6,7,11,10,9,5");
     break;
   case 0:
-    TurnRignt();
+    TurnRight();
     currnetNEWS = EAST;
     StopFor(200);
     check_NODE59();
@@ -94,37 +99,39 @@ void check_NODE3(){
 }
 
 void check_NODE59(){
-  Serial.println(">>> CHECK FUNC :: check_NODE5,9");
+  Serial.println(F(">>> CHECK FUNC :: check_NODE5,9"));
   check_2NODE(NODE5, NODE9);
   int N5 = NODE_dataReturn(NODE5);
   int N9 = NODE_dataReturn(NODE9);
   switch(N5){
   case 1:
-    // exit new5 (5)
+    // exit new5
     break;
   case 2:
     TurnLeft();
     currnetNEWS = NORTH;
     StopFor(200);
-    NODE_movement("2,6,7,11,10,9");
+    NODE_movement("2,6,7,11,10,9");   // exit 9
     break;
   case 0:
     switch (N9){
     case 1:
-      // exit new9 (5,9)
+      NODE_movement("5,9");           // exit new9
       break;
     case 2:
       TurnLeft();
       currnetNEWS = NORTH;
       StopFor(200);
       NODE_movement("2,3,7,11,10,6,5");
-      // exit 5 (2,3,7,11,10,6,5)
       break;
     case 0:
-      // (2)
-      // move_right();
-      // StopFor(0);
-      // check_NODE610();
+      TurnLeft();
+      currnetNEWS = NORTH;
+      StopFor(200);
+      NODE_movement("2");
+      move_right();
+      currnetNEWS = EAST;
+      check_NODE610();
       break;
     default:
       break;
@@ -136,7 +143,7 @@ void check_NODE59(){
 }
 
 void check_NODE610(){
-  Serial.println(">>> CHECK FUNC :: check_NODE6,10");
+  Serial.println(F(">>> CHECK FUNC :: check_NODE6,10"));
   check_2NODE(NODE6, NODE10);
   int N6 = NODE_dataReturn(NODE6);
   int N10 = NODE_dataReturn(NODE10);

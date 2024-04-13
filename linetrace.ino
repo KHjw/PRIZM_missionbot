@@ -1,26 +1,3 @@
-//******************************DIGITAL Linetrace******************************
-void linetrace_digitalPrint(int time){
-  if(prizm.readLineSensor(2) == 1){   // 검정에 닿았을 때
-    Serial.println("1");              // . 출력
-  }
-  else{                               // 흰색에 닿았을 때
-    Serial.print(".");                // 1 출력
-  }
-  delay(time);
-}
-
-void linetrace_digital(){
-  if(prizm.readLineSensor(2) == 0){   // 흰색에 닿았을 때
-    Serial.print(".");                // . 출력
-    prizm.setMotorPowers(10,125);
-  }
-  else{                               // 검정색에 닿았을 때
-    Serial.println("1");              // 1 출력
-    prizm.setMotorPowers(125,10);
-  }
-  delay(100);
-}
-
 //******************************ANALOG Linetrace******************************
 void linetrace_analogPrint(int time){
   int irData = analogRead(A1); 

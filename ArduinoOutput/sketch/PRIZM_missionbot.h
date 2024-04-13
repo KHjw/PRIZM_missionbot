@@ -11,6 +11,10 @@
 //****************************** system SETUP ******************************
 bool tf = false;
 
+int target_object = 0;
+int false_object = 0;
+int return_to = 0;
+
 PRIZM prizm;
 
 void (*ptrCurrentMode)();   // 현재모드 함수 포인터
@@ -32,7 +36,7 @@ int servo1_openPOS = 110; // servo1 열렸을때의 각도
 int servo2_openPOS = 35;  // servo2 열렸을때의 각도
 int servo3_downPOS = 90;  // servo3 내려갔을때의 각도
 
-int servo_maxDEG = 51;
+int servo_maxDEG = 54;
 int servo1_closePOS = servo1_openPOS - servo_maxDEG;  // servo1 닫혔을때의 각도
 int servo2_closePOS = servo2_openPOS + servo_maxDEG;  // servo2 닫혔을때의 각도
 int servo3_upPOS = 30;                                 // servo3 올라갔을때의 각도
@@ -49,8 +53,7 @@ void canGrab();
 void TurnRignt();
 void TurnLeft();
 void GoForward(int velocity, int time);
-void StopFor(long time);
-void Wait();
+void StopFor(unsigned long  time);
 
 //****************************** nodemove SETUP ******************************
 enum {NORTH = 0, EAST, SOUTH, WEST};
@@ -75,7 +78,6 @@ void NODE_to_Arr(int nodeNUM, int& row, int& col);
 
 void NODE_dataPrint(int nodeNUM);
 void NODE_dataUpdate(int nodeNUM, int data);
-void NODE_directionCheck();
 
 void NODE_move(int to);
 void NODE_move(int from, int to);
@@ -90,8 +92,6 @@ int default_speed = 10;
 int threshold = (irDataMAX + 19)/2+1;
 int testCNT = 0;
 
-void linetrace_digitalPrint(int time);
-void linetrace_digital();
 void linetrace_analogPrint(int time);
 void linetrace_analog();
 void linetrace_analogSetting(float gainData, int default_speedData, int irDataMAXData);
@@ -102,6 +102,9 @@ void intersectionDETECT();
 
 //****************************** huskylens SETUP ******************************
 HUSKYLENS huskylens;
+
+enum {COLA = 3, MONSTER = 1, TEA = 2};
+enum {GREEN = 1, RED, BLUE};
 
 //****************************** mission SETUP ******************************
 

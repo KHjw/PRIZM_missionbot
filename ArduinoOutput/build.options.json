@@ -1,5 +1,5 @@
 {
-  "additionalFiles": "..",
+  "additionalFiles": "..,..",
   "builtInLibrariesFolders": "/Applications/Arduino.app/Contents/Java/libraries",
   "builtInToolsFolders": "/Applications/Arduino.app/Contents/Java/tools-builder,/Applications/Arduino.app/Contents/Java/hardware/tools/avr,/Users/kh_jinu/Library/Arduino15/packages",
   "compiler.optimization_flags": "",

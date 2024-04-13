@@ -91,8 +91,6 @@ int default_speed = 10;
 int threshold = (irDataMAX + 19)/2+1;
 int testCNT = 0;
 
-void linetrace_digitalPrint(int time);
-void linetrace_digital();
 void linetrace_analogPrint(int time);
 void linetrace_analog();
 void linetrace_analogSetting(float gainData, int default_speedData, int irDataMAXData);
