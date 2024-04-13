@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:uno",
+    "port": "/dev/tty.usbserial-A907ZZ63",
+    "sketch": "PRIZM_missionbot.ino"
+}

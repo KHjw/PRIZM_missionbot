@@ -8,7 +8,7 @@ void move_StartPos(){
     currentNODE = NODE1;
     currnetNEWS = NORTH;
     intersectionCNT = 0;
-    NODE_movement("2,3,7,11,10,6,5");
+    NODE_movement("2,3,7,6,2,1");
     // ptrCurrentMode = Wait;
   }
 }
@@ -189,18 +189,21 @@ void move_1node(){
 }
 
 void move_right(){
+  StopFor(200);
   GoForward(60, 450);
   TurnRignt();
   StopFor(700);
 }
 
 void move_left(){
+  StopFor(200);
   GoForward(60, 300);
   TurnLeft();
   StopFor(700);
 }
 
 void move_180(){
+  StopFor(200);
   GoForward(60, 400);
   TurnAround();
   StopFor(700);
