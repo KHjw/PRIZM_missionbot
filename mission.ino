@@ -114,6 +114,10 @@ void check_NODE59(){
       // exit new9 (5,9)
       break;
     case 2:
+      TurnLeft();
+      currnetNEWS = NORTH;
+      StopFor(200);
+      NODE_movement("2,3,7,11,10,6,5");
       // exit 5 (2,3,7,11,10,6,5)
       break;
     case 0:
