@@ -54,7 +54,7 @@ void linetrace_analogSetting(float gainData, int default_speedData, int irDataMA
   default_speed = default_speedData;
   irDataMAX = irDataMAXData;
   threshold = (irDataMAX + 19)/2+1;
-  Serial.println("\nLineTrace Setting:");         // 세팅값 입력
+  Serial.print("LineTrace Setting:");         // 세팅값 입력
   Serial.println("irDataMAX:"+(String)(irDataMAX)+"  threshold:"+(String)(threshold)+"  default_speed:"+(String)(default_speed)+"  gain:"+(String)(gain));
 }
 
@@ -63,7 +63,7 @@ void linetrace_analogSetting(float gainData, int default_speedData, int irDataMA
   default_speed = default_speedData;
   irDataMAX = irDataMAXData;
   threshold = thresholdData;
-  Serial.println("\nLineTrace Setting:");         // 세팅값 입력
+  Serial.print("LineTrace Setting:");         // 세팅값 입력
   Serial.println("irDataMAX:"+(String)(irDataMAX)+"  threshold:"+(String)(threshold)+"  default_speed:"+(String)(default_speed)+"  gain:"+(String)(gain));
 }
 

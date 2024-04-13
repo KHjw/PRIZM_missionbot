@@ -1,28 +1,12 @@
-void move_StartPos(){
-  intersectionDETECT();
-  if(intersectionCNT < 1){
-    Serial.print(".");
-    linetrace_analog();
-  }
-  else{
-    currentNODE = NODE1;
-    currnetNEWS = NORTH;
-    intersectionCNT = 0;
-    NODE_movement("2,3,7,6,2,1");
-    // ptrCurrentMode = Wait;
-  }
-}
-
-void move_StartBoost(){
-  GoForward(80, 700);
-  // StopFor(1000000);
-  ptrCurrentMode = move_StartPos;
-}
-
 //****************************** NODE data ******************************
 void NODE_to_Arr(int nodeNUM, int& row, int& col){
   row = nodeNUM / 3;  // 행 위치 계산후 저장
   col = nodeNUM % 3;  // 열 위치 계산후 저장
+}
+
+int NODE_dataReturn(int nodeNUM){
+  NODE_to_Arr(nodeNUM, row, col);
+  return nodeDataArr[row][col];
 }
 
 void NODE_dataPrint(int nodeNUM){
@@ -159,7 +143,6 @@ void NODE_movement(String input){
   }
   for (int i = 0; i < 15; i++)
     moveArr[i] = 0;
-  ptrCurrentMode = Wait;
 }
 
 void movement_parsing(String input){
@@ -207,4 +190,19 @@ void move_180(){
   GoForward(60, 400);
   TurnAround();
   StopFor(700);
+}
+
+//****************************** NODE info ******************************
+void NODE_PrintAll(){
+  Serial.println("\nNODE DATA PRINT");
+  for(int i=0; i<3; i++){
+    for(int j=0; j<3; j++){
+      String node_data = (String)(nodeDataArr[i][j]);
+      if(node_data == "7") node_data = "?";
+      Serial.print(node_data);
+      if(j<2) Serial.print(" . ");
+    }
+    Serial.println("");
+  }
+  ptrCurrentMode = Wait;
 }

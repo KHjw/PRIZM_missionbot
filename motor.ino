@@ -74,3 +74,34 @@ void Wait(){
   prizm.setMotorPowers(125, 125);   // 정지
   ptrCurrentMode = voidFunc;
 }
+
+//****************************** return home ******************************
+void return_from9(){
+  if(return_to == GREEN){
+  }
+  else if(return_to == RED){
+  }
+  else if(return_to == BLUE){
+  }
+  // can drop
+}
+
+void return_from5(){
+  if(return_to == GREEN){
+  }
+  else if(return_to == RED){
+  }
+  else if(return_to == BLUE){
+  }
+  // can drop
+}
+
+void return_from1(){
+  if(return_to == GREEN){
+  }
+  else if(return_to == RED){
+  }
+  else if(return_to == BLUE){
+  }
+  // can drop
+}
