@@ -5,22 +5,37 @@
 void setup(){
   prizm.PrizmBegin();
   Serial.begin(115200);
-  Serial.print("\n\n[[[Setup Start]]]\n\n"); // 세팅완료 메시지
-
+  Serial.print((reinterpret_cast<const __FlashStringHelper *>(
+# 7 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino" 3
+              (__extension__({static const char __c[] __attribute__((__progmem__)) = (
+# 7 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino"
+              "\n\n[[[Setup Start]]]\n\n"
+# 7 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino" 3
+              ); &__c[0];}))
+# 7 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino"
+              ))); // 세팅완료 메시지
   motorInit();
   huskeylensInit();
-
-  Get_Avoid_Return(COLA, MONSTER, GREEN);
   battVoltagePrint();
   linetrace_analogSetting(3.0, 60, 40, 35);
+  // linetrace_analogSetting(0.7, 25, 40, 35);
 
-  Serial.print("\n\n[[[Setup Finish]]]\n\n"); // 세팅완료 메시지
+  Get_Avoid_Return(COLA, MONSTER, GREEN);
+
+  Serial.print((reinterpret_cast<const __FlashStringHelper *>(
+# 16 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino" 3
+              (__extension__({static const char __c[] __attribute__((__progmem__)) = (
+# 16 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino"
+              "\n\n[[[Setup Finish]]]\n\n"
+# 16 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino" 3
+              ); &__c[0];}))
+# 16 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino"
+              ))); // 세팅완료 메시지
 }
 
 void loop() {
   // battVoltagePrint(1000);
   // setBattVoltage2(12.8);
-  // canGrab();
 
   MissionStart();
 }
@@ -121,12 +136,12 @@ void check_1NODE_Near(){
 # 35 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
               )));
   Serial.println(sonic_data);
-  if(11 < sonic_data && sonic_data <= 19){
+  if(3 < sonic_data && sonic_data <= 15){
     if(isObjectTarget()) NODE_dataUpdate(NODE7, 1);
     else NODE_dataUpdate(NODE7, 2);
   }
   else
-    NODE_dataUpdate(NODE3, 0);
+    NODE_dataUpdate(NODE7, 0);
 }
 
 void check_2NODE(int node_near, int node_far){
@@ -205,6 +220,30 @@ bool isObjectTarget(){
   else return false;
 }
 
+int ReturnSquareSize(){
+  int zeroCount = 0; // 인식된 객체가 없는 상황을 카운트하는 변수
+
+  while (true) {
+    if (!huskylens.request() || !huskylens.isLearned() || !huskylens.available()) {
+      zeroCount++; // 조건에 맞지 않는 경우 카운트 증가
+      if (zeroCount >= 3)
+        return 0; // 3회 연속으로 객체가 인식되지 않은 경우 0을 반환
+      continue; // 조건에 맞지 않으면 계속 반복
+    }
+    int maxSquare = 0; // 최대 크기 저장 변수 초기화
+    zeroCount = 0; // 인식된 객체가 있으므로 카운터를 리셋
+    while (huskylens.available()) {
+      HUSKYLENSResult result = huskylens.read();
+      int currentSquare = result.width * result.height; // 현재 객체의 크기 계산
+      if (currentSquare > maxSquare) // 현재 객체가 지금까지 발견된 가장 큰 객체보다 크면
+        maxSquare = currentSquare; // 최대 크기를 현재 객체 크기로 업데이트
+    }
+    if (maxSquare > 0)
+      return maxSquare; // 가장 큰 객체의 크기 반환
+  }
+}
+
+
 int IdReturn(){
   if (!huskylens.request())
     return 0;
@@ -218,13 +257,13 @@ int IdReturn(){
       if (result.command == COMMAND_RETURN_BLOCK) {
         if (result.ID == 1 || result.ID == 2 || result.ID == 3) {
           Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 101 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino" 3
+# 125 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino" 3
                       (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 101 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+# 125 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
                       "Block ID="
-# 101 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino" 3
+# 125 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino" 3
                       ); &__c[0];}))
-# 101 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+# 125 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
                       )));
           Serial.println(result.ID);
           return result.ID;
@@ -280,11 +319,27 @@ void linetrace_analogPrint(int time){
   int irData = analogRead(A1);
   if(irData > irDataMAX){ // irData 값이 비정상적으로 높을 때, irDataMAX로 보정
     irData = irDataMAX;
-    Serial.print("irData calib -> ");
+    Serial.print((reinterpret_cast<const __FlashStringHelper *>(
+# 6 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino" 3
+                (__extension__({static const char __c[] __attribute__((__progmem__)) = (
+# 6 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+                "irData calib -> "
+# 6 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino" 3
+                ); &__c[0];}))
+# 6 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+                )));
   }
   Serial.print((String)(irData)+". ");
   if(testCNT > 10){
-    Serial.print("\n");
+    Serial.println((reinterpret_cast<const __FlashStringHelper *>(
+# 10 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino" 3
+                  (__extension__({static const char __c[] __attribute__((__progmem__)) = (
+# 10 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+                  ""
+# 10 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino" 3
+                  ); &__c[0];}))
+# 10 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+                  )));
     testCNT = 0;
   }
   testCNT ++;
@@ -308,7 +363,15 @@ void linetrace_analogSetting(float gainData, int default_speedData, int irDataMA
   default_speed = default_speedData;
   irDataMAX = irDataMAXData;
   threshold = (irDataMAX + 19)/2+1;
-  Serial.print("LineTrace Setting:"); // 세팅값 입력
+  Serial.print((reinterpret_cast<const __FlashStringHelper *>(
+# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino" 3
+              (__extension__({static const char __c[] __attribute__((__progmem__)) = (
+# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+              "LineTrace Setting:"
+# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino" 3
+              ); &__c[0];}))
+# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+              ))); // 세팅값 입력
   Serial.println("irDataMAX:"+(String)(irDataMAX)+"  threshold:"+(String)(threshold)+"  default_speed:"+(String)(default_speed)+"  gain:"+(String)(gain));
 }
 
@@ -317,7 +380,15 @@ void linetrace_analogSetting(float gainData, int default_speedData, int irDataMA
   default_speed = default_speedData;
   irDataMAX = irDataMAXData;
   threshold = thresholdData;
-  Serial.print("LineTrace Setting:"); // 세팅값 입력
+  Serial.print((reinterpret_cast<const __FlashStringHelper *>(
+# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino" 3
+              (__extension__({static const char __c[] __attribute__((__progmem__)) = (
+# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+              "LineTrace Setting:"
+# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino" 3
+              ); &__c[0];}))
+# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+              ))); // 세팅값 입력
   Serial.println("irDataMAX:"+(String)(irDataMAX)+"  threshold:"+(String)(threshold)+"  default_speed:"+(String)(default_speed)+"  gain:"+(String)(gain));
 }
 
@@ -365,172 +436,175 @@ void Get_Avoid_Return(int target_id, int false_id, int return_color){
                 ); &__c[0];}))
 # 10 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
+    // servo_maxDEG = 54;
     break;
   case MONSTER:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 13 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 14 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 13 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 14 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "MONSTER"
-# 13 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 14 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 13 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 14 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
+    // servo_maxDEG = 54;
     break;
   case TEA:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 16 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 18 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 16 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 18 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "TEA"
-# 16 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 18 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 16 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 18 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
+    // servo_maxDEG = 54;
     break;
   default:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 19 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 22 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 19 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 22 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "???"
-# 19 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 22 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 19 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 22 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
     break;
   }
   Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 22 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 25 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
               (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 22 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 25 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
               " / Avoid : "
-# 22 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 25 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
               ); &__c[0];}))
-# 22 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 25 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
               )));
   switch (false_object){
   case COLA:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 25 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 28 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 25 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 28 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "COLA"
-# 25 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 28 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 25 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 28 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
     break;
   case MONSTER:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 28 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 31 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 28 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 31 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "MONSTER"
-# 28 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 31 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 28 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 31 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
     break;
   case TEA:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 31 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 31 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "TEA"
-# 31 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 31 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
     break;
   default:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 37 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 37 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "???"
-# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 37 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 34 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 37 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
     break;
   }
   Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 37 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 40 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
               (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 37 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 40 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
               " / Return to : "
-# 37 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 40 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
               ); &__c[0];}))
-# 37 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 40 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
               )));
   switch (return_color){
   case GREEN:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 40 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 40 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "GREEN"
-# 40 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 40 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
     break;
   case RED:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 46 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 46 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "RED"
-# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 46 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 46 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
     break;
   case BLUE:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 46 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 49 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 46 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 49 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "BLUE"
-# 46 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 49 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 46 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 49 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
     break;
   default:
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 49 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 52 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 49 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 52 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "???"
-# 49 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 52 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 49 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 52 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
     break;
   }
   Serial.println((reinterpret_cast<const __FlashStringHelper *>(
-# 52 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 55 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 52 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 55 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 " ]"
-# 52 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 55 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 52 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 55 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
 }
 
 //****************************** mission func ******************************
 void MissionStart(){
   Serial.println((reinterpret_cast<const __FlashStringHelper *>(
-# 57 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 60 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 57 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 60 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 "Mission Start!!!"
-# 57 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 60 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 57 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 60 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
   move_StartPos();
   check_NODE3();
@@ -539,18 +613,19 @@ void MissionStart(){
 }
 
 void move_StartPos(){
-  GoForward(80, 700); // 첫 번째 intersection 지날때 까지 boost
+  // GoForward(80, 700);       // 첫 번째 intersection 지날때 까지 boost
+  move_1node();
   move_1node(); // NODE1 으로 이동
   currentNODE = NODE1; // 현재 위치 저장
   currnetNEWS = NORTH; // 현재 방향 저장
   Serial.println((reinterpret_cast<const __FlashStringHelper *>(
-# 69 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 73 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 69 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 73 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 ">>> At Starting Position"
-# 69 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 73 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 69 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 73 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
   StopFor(100);
 }
@@ -558,38 +633,38 @@ void move_StartPos(){
 void check_NODE3(){
   GoForward(100, 500);
   Serial.println((reinterpret_cast<const __FlashStringHelper *>(
-# 75 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 79 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 75 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 79 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 ">>> CHECK FUNC :: check_NODE3"
-# 75 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 79 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 75 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 79 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
   StopFor(0);
   check_1NODE_Far();
   switch (NODE_dataReturn(NODE3)){
   case 1:
     Serial.println((reinterpret_cast<const __FlashStringHelper *>(
-# 80 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 84 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                   (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 80 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 84 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                   "NODE3 1"
-# 80 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 84 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                   ); &__c[0];}))
-# 80 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 84 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                   )));
     NODE_movement("2,3,2");
     break;
   case 2:
     Serial.println((reinterpret_cast<const __FlashStringHelper *>(
-# 84 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 88 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                   (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 84 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 88 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                   "NODE3 2"
-# 84 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 88 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                   ); &__c[0];}))
-# 84 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 88 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                   )));
     NODE_movement("2,6,7,11,10,9,5");
     break;
@@ -606,20 +681,20 @@ void check_NODE3(){
 
 void check_NODE59(){
   Serial.println((reinterpret_cast<const __FlashStringHelper *>(
-# 99 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 103 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 99 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 103 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 ">>> CHECK FUNC :: check_NODE5,9"
-# 99 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 103 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 99 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 103 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
   check_2NODE(NODE5, NODE9);
   int N5 = NODE_dataReturn(NODE5);
   int N9 = NODE_dataReturn(NODE9);
   switch(N5){
   case 1:
-    // exit new5
+    NODE_movement("5");
     break;
   case 2:
     TurnLeft();
@@ -630,7 +705,13 @@ void check_NODE59(){
   case 0:
     switch (N9){
     case 1:
-      NODE_movement("5,9"); // exit new9
+      while(prizm.readSonicSensorCM(4) > 10)
+        linetrace_analog();
+      canApproach();
+      while(!isCanGrab)
+        linetrace_analog();
+      currentNODE = NODE9; // 현재 위치 저장
+      currnetNEWS = EAST; // 현재 방향 저장 
       break;
     case 2:
       TurnLeft();
@@ -658,34 +739,37 @@ void check_NODE59(){
 
 void check_NODE610(){
   Serial.println((reinterpret_cast<const __FlashStringHelper *>(
-# 143 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 153 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 143 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 153 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 ">>> CHECK FUNC :: check_NODE6,10"
-# 143 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
+# 153 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino" 3
                 ); &__c[0];}))
-# 143 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+# 153 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
                 )));
   check_2NODE(NODE6, NODE10);
   int N6 = NODE_dataReturn(NODE6);
   int N10 = NODE_dataReturn(NODE10);
   switch(N6){
   case 1:
-    // exit 5 (2,6,5)
+    NODE_movement("6,5");
     break;
   case 2:
-    // exit 9 (2,3,7,11,10,9)
+    NODE_movement("3,7,11,10,9");
     break;
   case 0:
     switch (N10){
     case 1:
-      // exit 9 (2,6,10,9)
+      NODE_movement("6,10,9");
       break;
     case 2:
-      // 체크
+      NODE_movement("6,7,11,7,6,5");
       break;
     case 0:
-      // check_NODE7()
+      NODE_movement("6");
+      move_left();
+      currnetNEWS = NORTH;
+      check_NODE7();
       break;
     default:
       break;
@@ -700,10 +784,18 @@ void check_NODE7(){
   check_1NODE_Near();
   switch (NODE_dataReturn(NODE7)){
   case 1:
-    // exit 5 (7,6,5)
+    NODE_movement("7,6,5");
     break;
   case 2:
-    // exit 9 (10,11,10,9)
+    GoForward(-40, 50);
+    TurnRight();
+    currnetNEWS = EAST;
+    NODE_movement("10,11");
+    GoForward(80, 200);
+    move_180();
+    currentNODE = NODE11;
+    currnetNEWS = SOUTH;
+    NODE_movement("10,9");
     break;
   default:
     break;
@@ -738,22 +830,54 @@ void gripper_moveUP(int time){
   delay(time);
 }
 
+//****************************** can grab ******************************
 void canGrab(){
   if(!isCanGrab){
-    if(prizm.readSonicSensorCM(4) <= canDetectCm){
-      prizm.setMotorPowers(125,125); // 정지
+    if(prizm.readSonicSensorCM(4) <= 3){
       Serial.println((reinterpret_cast<const __FlashStringHelper *>(
 # 33 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino" 3
                     (__extension__({static const char __c[] __attribute__((__progmem__)) = (
 # 33 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-                    "Can Detected!!!"
+                    "!!!Can Detected!!!"
 # 33 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino" 3
                     ); &__c[0];}))
 # 33 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
                     )));
-      gripper_moveUP(2000);
+      StopFor(50);
+      gripper_moveUP(1000);
       isCanGrab = true;
+      NODE_dataUpdate(currentNODE, 1);
+      if(NODE_dataReturn(NODE11) == 1 || NODE_dataReturn(NODE5) == 1)
+        intersectionCNT == 1;
+      StopFor(2000);
     }
+  }
+}
+
+void canApproach(){
+  if(!isCanGrab){
+    StopFor(100);
+    if(ReturnSquareSize() > 1450){
+      Serial.println(ReturnSquareSize());
+      Serial.println((reinterpret_cast<const __FlashStringHelper *>(
+# 50 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino" 3
+                    (__extension__({static const char __c[] __attribute__((__progmem__)) = (
+# 50 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+                    "!!!Can Approach!!!"
+# 50 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino" 3
+                    ); &__c[0];}))
+# 50 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+                    )));
+      linetrace_analogSetting(0.7, 15, 40, 35);
+      while(!isCanGrab && intersectionCNT == 0){
+        canGrab();
+        intersectionDETECT();
+        linetrace_analog();
+      }
+      linetrace_analogSetting(3.0, 60, 40, 35);
+    }
+    else
+      Serial.println(ReturnSquareSize());
   }
 }
 
@@ -794,13 +918,13 @@ void TurnCalib(){
   intersectionDETECT();
   if(intersectionCNT > 0){
     Serial.println((reinterpret_cast<const __FlashStringHelper *>(
-# 76 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino" 3
+# 100 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino" 3
                   (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 76 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+# 100 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
                   "TurnCalib"
-# 76 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino" 3
+# 100 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino" 3
                   ); &__c[0];}))
-# 76 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+# 100 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
                   )));
     prizm.setMotorPowers(40, -40);
     delay(50);
@@ -1096,14 +1220,15 @@ void move_NEWS(int news){
       break;
   }
   currnetNEWS = news;
+  canApproach();
   Serial.println((reinterpret_cast<const __FlashStringHelper *>(
-# 137 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino" 3
+# 138 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 137 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
+# 138 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
                 "move_1node"
-# 137 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino" 3
+# 138 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino" 3
                 ); &__c[0];}))
-# 137 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
+# 138 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
                 )));
   move_1node();
 }
@@ -1114,13 +1239,13 @@ void NODE_movement(String input){
   int movetotalCNT = moveCNT;
   while(moveCNT > 0){
     Serial.print((reinterpret_cast<const __FlashStringHelper *>(
-# 146 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino" 3
+# 147 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino" 3
                 (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 146 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
+# 147 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
                 "moveCNT:"
-# 146 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino" 3
+# 147 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino" 3
                 ); &__c[0];}))
-# 146 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
+# 147 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
                 )));
     Serial.println(moveCNT);
     int moveto = moveArr[movetotalCNT - moveCNT];
@@ -1129,10 +1254,6 @@ void NODE_movement(String input){
   }
   for (int i = 0; i < 15; i++)
     moveArr[i] = 0;
-}
-
-void NODE_movementGrab(String input){
-
 }
 
 void movement_parsing(String input){
@@ -1152,7 +1273,7 @@ void movement_parsing(String input){
     moveArr[i] = 0;
 }
 
-//****************************** simple move ******************************
+//****************************** move 1node ******************************
 void move_1node(){
   while(intersectionCNT < 1){
     intersectionDETECT();
@@ -1161,6 +1282,7 @@ void move_1node(){
   intersectionCNT = 0;
 }
 
+//****************************** simple move ******************************
 void move_right(){
   StopFor(200);
   GoForward(60, 450);

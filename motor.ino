@@ -26,14 +26,38 @@ void gripper_moveUP(int time){
   delay(time);
 }
 
+//****************************** can grab ******************************
 void canGrab(){
   if(!isCanGrab){
     if(prizm.readSonicSensorCM(4) <= canDetectCm){
-      prizm.setMotorPowers(125,125);  // 정지
-      Serial.println(F("Can Detected!!!"));
-      gripper_moveUP(2000);
+      Serial.println(F("!!!Can Detected!!!"));
+      StopFor(50);
+      gripper_moveUP(1000);
       isCanGrab = true;
+      NODE_dataUpdate(currentNODE, 1);
+      if(NODE_dataReturn(NODE11) == 1 || NODE_dataReturn(NODE5) == 1)
+        intersectionCNT == 1;
+      StopFor(2000);
     }
+  }
+}
+
+void canApproach(){
+  if(!isCanGrab){
+    StopFor(100);
+    if(ReturnSquareSize() > 1450){
+      Serial.println(ReturnSquareSize());
+      Serial.println(F("!!!Can Approach!!!"));
+      linetrace_analogSetting(0.7, 15, 40, 35);
+      while(!isCanGrab && intersectionCNT == 0){
+        canGrab();
+        intersectionDETECT();
+        linetrace_analog();
+      }
+      linetrace_analogSetting(3.0, 60, 40, 35);
+    }
+    else
+      Serial.println(ReturnSquareSize());
   }
 }
 

@@ -134,6 +134,7 @@ void move_NEWS(int news){
       break;
   }
   currnetNEWS = news;
+  canApproach();
   Serial.println(F("move_1node"));
   move_1node();
 }
@@ -153,10 +154,6 @@ void NODE_movement(String input){
     moveArr[i] = 0;
 }
 
-void NODE_movementGrab(String input){
-
-}
-
 void movement_parsing(String input){
   int index = 0;  // 배열 인덱스 초기화
 
@@ -174,7 +171,7 @@ void movement_parsing(String input){
     moveArr[i] = 0;
 }
 
-//****************************** simple move ******************************
+//****************************** move 1node ******************************
 void move_1node(){
   while(intersectionCNT < 1){
     intersectionDETECT();
@@ -183,6 +180,7 @@ void move_1node(){
   intersectionCNT = 0;
 }
 
+//****************************** simple move ******************************
 void move_right(){
   StopFor(200);
   GoForward(60, 450);

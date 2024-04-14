@@ -34,12 +34,12 @@ void check_1NODE_Near(){
   sonic_data = sonic_data / checkNUM;
   Serial.print(F("sonic data : "));
   Serial.println(sonic_data);
-  if(11 < sonic_data && sonic_data <= 19){
+  if(3 < sonic_data && sonic_data <= 15){
     if(isObjectTarget())  NODE_dataUpdate(NODE7, 1);
     else                  NODE_dataUpdate(NODE7, 2);
   }
   else
-    NODE_dataUpdate(NODE3, 0);
+    NODE_dataUpdate(NODE7, 0);
 }
 
 void check_2NODE(int node_near, int node_far){
@@ -85,6 +85,30 @@ bool isObjectTarget(){
   if(id_detected == target_object)  return true;
   else return false;
 }
+
+int ReturnSquareSize(){
+  int zeroCount = 0;  // 인식된 객체가 없는 상황을 카운트하는 변수
+
+  while (true) {
+    if (!huskylens.request() || !huskylens.isLearned() || !huskylens.available()) {
+      zeroCount++;  // 조건에 맞지 않는 경우 카운트 증가
+      if (zeroCount >= 3)
+        return 0;  // 3회 연속으로 객체가 인식되지 않은 경우 0을 반환
+      continue;  // 조건에 맞지 않으면 계속 반복
+    }
+    int maxSquare = 0;  // 최대 크기 저장 변수 초기화
+    zeroCount = 0;  // 인식된 객체가 있으므로 카운터를 리셋
+    while (huskylens.available()) {
+      HUSKYLENSResult result = huskylens.read();
+      int currentSquare = result.width * result.height;  // 현재 객체의 크기 계산
+      if (currentSquare > maxSquare)    // 현재 객체가 지금까지 발견된 가장 큰 객체보다 크면
+        maxSquare = currentSquare;      // 최대 크기를 현재 객체 크기로 업데이트
+    }
+    if (maxSquare > 0)  
+      return maxSquare;  // 가장 큰 객체의 크기 반환
+  }
+}
+
 
 int IdReturn(){
   if (!huskylens.request())

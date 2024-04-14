@@ -65,7 +65,8 @@ void MissionStart(){
 }
 
 void move_StartPos(){
-  GoForward(80, 700);       // 첫 번째 intersection 지날때 까지 boost
+  // GoForward(80, 700);       // 첫 번째 intersection 지날때 까지 boost
+  move_1node();
   move_1node();             // NODE1 으로 이동
   currentNODE = NODE1;      // 현재 위치 저장
   currnetNEWS = NORTH;      // 현재 방향 저장
@@ -105,7 +106,7 @@ void check_NODE59(){
   int N9 = NODE_dataReturn(NODE9);
   switch(N5){
   case 1:
-    // exit new5
+    NODE_movement("5");
     break;
   case 2:
     TurnLeft();
@@ -116,7 +117,13 @@ void check_NODE59(){
   case 0:
     switch (N9){
     case 1:
-      NODE_movement("5,9");           // exit new9
+      while(prizm.readSonicSensorCM(4) > 10)
+        linetrace_analog();
+      canApproach();
+      while(!isCanGrab)
+        linetrace_analog();
+      currentNODE = NODE9;      // 현재 위치 저장
+      currnetNEWS = EAST;        // 현재 방향 저장 
       break;
     case 2:
       TurnLeft();
@@ -149,21 +156,24 @@ void check_NODE610(){
   int N10 = NODE_dataReturn(NODE10);
   switch(N6){
   case 1:
-    // exit 5 (2,6,5)
+    NODE_movement("6,5");
     break;
   case 2:
-    // exit 9 (2,3,7,11,10,9)
+    NODE_movement("3,7,11,10,9");
     break;
   case 0:
     switch (N10){
     case 1:
-      // exit 9 (2,6,10,9)
+      NODE_movement("6,10,9");
       break;
     case 2:
-      // 체크
+      NODE_movement("6,7,11,7,6,5");
       break;
     case 0:
-      // check_NODE7()
+      NODE_movement("6");
+      move_left();
+      currnetNEWS = NORTH;
+      check_NODE7();
       break;
     default:
       break;
@@ -178,10 +188,18 @@ void check_NODE7(){
   check_1NODE_Near();
   switch (NODE_dataReturn(NODE7)){
   case 1:
-    // exit 5 (7,6,5)
+    NODE_movement("7,6,5");
     break;
   case 2:
-    // exit 9 (10,11,10,9)
+    GoForward(-40, 50);
+    TurnRight();
+    currnetNEWS = EAST;
+    NODE_movement("10,11");
+    GoForward(80, 200);
+    move_180();
+    currentNODE = NODE11;
+    currnetNEWS = SOUTH;
+    NODE_movement("10,9");
     break;
   default:
     break;

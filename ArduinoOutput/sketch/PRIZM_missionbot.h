@@ -36,13 +36,15 @@ int servo1_openPOS = 110; // servo1 열렸을때의 각도
 int servo2_openPOS = 35;  // servo2 열렸을때의 각도
 int servo3_downPOS = 90;  // servo3 내려갔을때의 각도
 
-int servo_maxDEG = 54;
+int servo_maxDEG = 57;
 int servo1_closePOS = servo1_openPOS - servo_maxDEG;  // servo1 닫혔을때의 각도
 int servo2_closePOS = servo2_openPOS + servo_maxDEG;  // servo2 닫혔을때의 각도
 int servo3_upPOS = 30;                                 // servo3 올라갔을때의 각도
 
 // gripper
-int canDetectCm = 3;
+#define canDetectCm     3
+#define canApproachCm   15
+
 bool isCanGrab = false;
 void gripper_openPOS();
 void gripper_closePOS();
@@ -50,7 +52,7 @@ void gripper_moveUP(int time);    // 들어올리는데 걸리는 시간
 void canGrab();
 
 // move
-void TurnRignt();
+void TurnRight();
 void TurnLeft();
 void GoForward(int velocity, int time);
 void StopFor(unsigned long  time);
