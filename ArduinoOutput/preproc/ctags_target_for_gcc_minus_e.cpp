@@ -755,6 +755,8 @@ void check_NODE610(){
     NODE_movement("6,5");
     break;
   case 2:
+    TurnLeft();
+    currnetNEWS = NORTH;
     NODE_movement("3,7,11,10,9");
     break;
   case 0:

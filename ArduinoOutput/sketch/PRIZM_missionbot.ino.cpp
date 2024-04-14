@@ -53,7 +53,7 @@ void check_NODE3();
 void check_NODE59();
 #line 152 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE610();
-#line 187 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 189 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE7();
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void motorInit();
@@ -566,6 +566,8 @@ void check_NODE610(){
     NODE_movement("6,5");
     break;
   case 2:
+    TurnLeft();
+    currnetNEWS = NORTH;
     NODE_movement("3,7,11,10,9");
     break;
   case 0:
