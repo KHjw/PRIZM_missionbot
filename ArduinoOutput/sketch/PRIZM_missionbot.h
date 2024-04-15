@@ -61,7 +61,19 @@ void StopFor(unsigned long time);
 
 //****************************** nodemove SETUP ******************************
 enum { NORTH = 0, EAST, SOUTH, WEST };
-enum { NODE3 = 0, NODE7, NODE11, NODE2, NODE6, NODE10, NODE1, NODE5, NODE9 };
+enum {
+  NODE3 = 0,
+  NODE7,
+  NODE11,
+  NODE2,
+  NODE6,
+  NODE10,
+  NODE1,
+  NODE5,
+  NODE9,
+  NODE5_v2,
+  NODE9_v2
+};
 
 int currentNODE = 0;  // current NODE
 int currnetNEWS = 0;  // current DIRECTION(N,E,W,S)

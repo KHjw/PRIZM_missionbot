@@ -68,36 +68,6 @@
  {
   "directory": "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot",
   "arguments": [
-   "/Users/kh_jinu/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-gcc",
-   "-c",
-   "-g",
-   "-Os",
-   "-w",
-   "-std=gnu11",
-   "-ffunction-sections",
-   "-fdata-sections",
-   "-MMD",
-   "-flto",
-   "-fno-fat-lto-objects",
-   "-mmcu=atmega328p",
-   "-DF_CPU=16000000L",
-   "-DARDUINO=10607",
-   "-DARDUINO_AVR_UNO",
-   "-DARDUINO_ARCH_AVR",
-   "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino",
-   "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/variants/standard",
-   "-I/Users/kh_jinu/Documents/Arduino/libraries/TETRIX_PRIZM",
-   "-I/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS",
-   "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
-   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HuskyLensProtocolCore.c",
-   "-o",
-   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/HuskyLensProtocolCore.c.o"
-  ],
-  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HuskyLensProtocolCore.c"
- },
- {
-  "directory": "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot",
-  "arguments": [
    "/Users/kh_jinu/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++",
    "-c",
    "-g",
@@ -155,11 +125,11 @@
    "-I/Users/kh_jinu/Documents/Arduino/libraries/TETRIX_PRIZM",
    "-I/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS",
    "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
-   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp",
+   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HUSKYLENS.cpp",
    "-o",
-   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp.o"
+   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/HUSKYLENS.cpp.o"
   ],
-  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp"
+  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HUSKYLENS.cpp"
  },
  {
   "directory": "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot",
@@ -188,11 +158,41 @@
    "-I/Users/kh_jinu/Documents/Arduino/libraries/TETRIX_PRIZM",
    "-I/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS",
    "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
-   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HUSKYLENS.cpp",
+   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp",
    "-o",
-   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/HUSKYLENS.cpp.o"
+   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp.o"
   ],
-  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HUSKYLENS.cpp"
+  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp"
+ },
+ {
+  "directory": "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot",
+  "arguments": [
+   "/Users/kh_jinu/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-gcc",
+   "-c",
+   "-g",
+   "-Os",
+   "-w",
+   "-std=gnu11",
+   "-ffunction-sections",
+   "-fdata-sections",
+   "-MMD",
+   "-flto",
+   "-fno-fat-lto-objects",
+   "-mmcu=atmega328p",
+   "-DF_CPU=16000000L",
+   "-DARDUINO=10607",
+   "-DARDUINO_AVR_UNO",
+   "-DARDUINO_ARCH_AVR",
+   "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino",
+   "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/variants/standard",
+   "-I/Users/kh_jinu/Documents/Arduino/libraries/TETRIX_PRIZM",
+   "-I/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS",
+   "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
+   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HuskyLensProtocolCore.c",
+   "-o",
+   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/HuskyLensProtocolCore.c.o"
+  ],
+  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HuskyLensProtocolCore.c"
  },
  {
   "directory": "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot",

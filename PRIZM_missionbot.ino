@@ -19,5 +19,9 @@ void loop() {
   // battVoltagePrint(1000);
   // setBattVoltage2(12.8);  // 정상작동 배터리 전압 12.8 ~ 12.2
 
-  MissionStart();
+  // MissionStart();
+  move_StartPos();
+  NODE_movement("2,3,7,6,5");
+  move_Exit(NODE5);
+  StopFor(100000);
 }
