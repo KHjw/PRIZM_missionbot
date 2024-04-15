@@ -1,62 +1,62 @@
-void Get_Avoid_Return(int target_id, int false_id, int return_color){
+void Get_Avoid_Return(int target_id, int false_id, int return_color) {
   target_object = target_id;
   false_object = false_id;
   return_to = return_color;
 
   Serial.print(F("Mission Data Receved :: "));
   Serial.print(F("[ Target : "));
-  switch (target_object){
-  case COLA:
-    Serial.print(F("COLA"));
-    // servo_maxDEG = 54;
-    break;
-  case MONSTER:
-    Serial.print(F("MONSTER"));
-    // servo_maxDEG = 54;
-    break;
-  case TEA:
-    Serial.print(F("TEA"));
-    // servo_maxDEG = 54;
-    break;
-  default:
-    Serial.print(F("???"));
-    break;
+  switch (target_object) {
+    case COLA:
+      Serial.print(F("COLA"));
+      servo_maxDEG = 57;
+      break;
+    case MONSTER:
+      Serial.print(F("MONSTER"));
+      servo_maxDEG = 57;
+      break;
+    case TEA:
+      Serial.print(F("TEA"));
+      servo_maxDEG = 54;
+      break;
+    default:
+      Serial.print(F("???"));
+      break;
   }
   Serial.print(F(" / Avoid : "));
-  switch (false_object){
-  case COLA:
-    Serial.print(F("COLA"));
-    break;
-  case MONSTER:
-    Serial.print(F("MONSTER"));
-    break;
-  case TEA:
-    Serial.print(F("TEA"));
-    break;
-  default:
-    Serial.print(F("???"));
-    break;
+  switch (false_object) {
+    case COLA:
+      Serial.print(F("COLA"));
+      break;
+    case MONSTER:
+      Serial.print(F("MONSTER"));
+      break;
+    case TEA:
+      Serial.print(F("TEA"));
+      break;
+    default:
+      Serial.print(F("???"));
+      break;
   }
   Serial.print(F(" / Return to : "));
-  switch (return_color){
-  case GREEN:
-    Serial.print(F("GREEN"));
-    break;
-  case RED:
-    Serial.print(F("RED"));
-    break;
-  case BLUE:
-    Serial.print(F("BLUE"));
-    break;
-  default:
-    Serial.print(F("???"));
-    break;
+  switch (return_color) {
+    case GREEN:
+      Serial.print(F("GREEN"));
+      break;
+    case RED:
+      Serial.print(F("RED"));
+      break;
+    case BLUE:
+      Serial.print(F("BLUE"));
+      break;
+    default:
+      Serial.print(F("???"));
+      break;
   }
   Serial.println(F(" ]"));
 }
 
 //****************************** mission func ******************************
-void MissionStart(){
+void MissionStart() {
   Serial.println(F("Mission Start!!!"));
   move_StartPos();
   check_NODE3();
@@ -64,146 +64,145 @@ void MissionStart(){
   StopFor(1000000);
 }
 
-void move_StartPos(){
+void move_StartPos() {
   // GoForward(80, 700);       // 첫 번째 intersection 지날때 까지 boost
   move_1node();
-  move_1node();             // NODE1 으로 이동
-  currentNODE = NODE1;      // 현재 위치 저장
-  currnetNEWS = NORTH;      // 현재 방향 저장
+  move_1node();         // NODE1 으로 이동
+  currentNODE = NODE1;  // 현재 위치 저장
+  currnetNEWS = NORTH;  // 현재 방향 저장
   Serial.println(F(">>> At Starting Position"));
   StopFor(100);
 }
 
-void check_NODE3(){
+//****************************** NODE check ******************************
+void check_NODE3() {
   GoForward(100, 500);
   Serial.println(F(">>> CHECK FUNC :: check_NODE3"));
   StopFor(0);
   check_1NODE_Far();
-  switch (NODE_dataReturn(NODE3)){
-  case 1:
-    Serial.println(F("NODE3 1"));
-    NODE_movement("2,3,2");
-    break;
-  case 2:
-    Serial.println(F("NODE3 2"));
-    NODE_movement("2,6,7,11,10,9,5");
-    break;
-  case 0:
-    TurnRight();
-    currnetNEWS = EAST;
-    StopFor(200);
-    check_NODE59();
-    break;
-  default:
-    break;
+  switch (NODE_dataReturn(NODE3)) {
+    case 1:
+      Serial.println(F("NODE3 1"));
+      NODE_movement("2,3,2");
+      break;
+    case 2:
+      Serial.println(F("NODE3 2"));
+      NODE_movement("2,6,7,11,10,9,5");
+      break;
+    case 0:
+      TurnRight();
+      currnetNEWS = EAST;
+      StopFor(200);
+      check_NODE59();
+      break;
+    default:
+      break;
   }
 }
 
-void check_NODE59(){
+void check_NODE59() {
   Serial.println(F(">>> CHECK FUNC :: check_NODE5,9"));
   check_2NODE(NODE5, NODE9);
   int N5 = NODE_dataReturn(NODE5);
   int N9 = NODE_dataReturn(NODE9);
-  switch(N5){
-  case 1:
-    NODE_movement("5");
-    break;
-  case 2:
-    TurnLeft();
-    currnetNEWS = NORTH;
-    StopFor(200);
-    NODE_movement("2,6,7,11,10,9");   // exit 9
-    break;
-  case 0:
-    switch (N9){
+  switch (N5) {
     case 1:
-      while(prizm.readSonicSensorCM(4) > 10)
-        linetrace_analog();
-      canApproach();
-      while(!isCanGrab)
-        linetrace_analog();
-      currentNODE = NODE9;      // 현재 위치 저장
-      currnetNEWS = EAST;        // 현재 방향 저장 
+      NODE_movement("5");
       break;
     case 2:
       TurnLeft();
       currnetNEWS = NORTH;
       StopFor(200);
-      NODE_movement("2,3,7,11,10,6,5");
+      NODE_movement("2,6,7,11,10,9");  // exit 9
       break;
     case 0:
-      TurnLeft();
-      currnetNEWS = NORTH;
-      StopFor(200);
-      NODE_movement("2");
-      move_right();
-      currnetNEWS = EAST;
-      check_NODE610();
+      switch (N9) {
+        case 1:
+          while (prizm.readSonicSensorCM(4) > 10) linetrace_analog();
+          canApproach();
+          while (!isCanGrab) linetrace_analog();
+          currentNODE = NODE9;  // 현재 위치 저장
+          currnetNEWS = EAST;   // 현재 방향 저장
+          break;
+        case 2:
+          TurnLeft();
+          currnetNEWS = NORTH;
+          StopFor(200);
+          NODE_movement("2,3,7,11,10,6,5");
+          break;
+        case 0:
+          TurnLeft();
+          currnetNEWS = NORTH;
+          StopFor(200);
+          NODE_movement("2");
+          move_right();
+          currnetNEWS = EAST;
+          check_NODE610();
+          break;
+        default:
+          break;
+      }
       break;
     default:
       break;
-    }
-    break;
-  default:
-    break;
   }
 }
 
-void check_NODE610(){
+void check_NODE610() {
   Serial.println(F(">>> CHECK FUNC :: check_NODE6,10"));
   check_2NODE(NODE6, NODE10);
   int N6 = NODE_dataReturn(NODE6);
   int N10 = NODE_dataReturn(NODE10);
-  switch(N6){
-  case 1:
-    NODE_movement("6,5");
-    break;
-  case 2:
-    TurnLeft();
-    currnetNEWS = NORTH;
-    NODE_movement("3,7,11,10,9");
-    break;
-  case 0:
-    switch (N10){
+  switch (N6) {
     case 1:
-      NODE_movement("6,10,9");
+      NODE_movement("6,5");
       break;
     case 2:
-      NODE_movement("6,7,11,7,6,5");
+      TurnLeft();
+      currnetNEWS = NORTH;
+      NODE_movement("3,7,11,10,9");
       break;
     case 0:
-      NODE_movement("6");
-      move_left();
-      currnetNEWS = NORTH;
-      check_NODE7();
+      switch (N10) {
+        case 1:
+          NODE_movement("6,10,9");
+          break;
+        case 2:
+          NODE_movement("6,7,11,7,6,5");
+          break;
+        case 0:
+          NODE_movement("6");
+          move_left();
+          currnetNEWS = NORTH;
+          check_NODE7();
+          break;
+        default:
+          break;
+      }
       break;
     default:
       break;
-    }
-    break;
-  default:
-    break;
   }
 }
 
-void check_NODE7(){
+void check_NODE7() {
   check_1NODE_Near();
-  switch (NODE_dataReturn(NODE7)){
-  case 1:
-    NODE_movement("7,6,5");
-    break;
-  case 2:
-    GoForward(-40, 50);
-    TurnRight();
-    currnetNEWS = EAST;
-    NODE_movement("10,11");
-    GoForward(80, 200);
-    move_180();
-    currentNODE = NODE11;
-    currnetNEWS = SOUTH;
-    NODE_movement("10,9");
-    break;
-  default:
-    break;
+  switch (NODE_dataReturn(NODE7)) {
+    case 1:
+      NODE_movement("7,6,5");
+      break;
+    case 2:
+      GoForward(-40, 50);
+      TurnRight();
+      currnetNEWS = EAST;
+      NODE_movement("10,11");
+      GoForward(80, 200);
+      move_180();
+      currentNODE = NODE11;
+      currnetNEWS = SOUTH;
+      NODE_movement("10,9");
+      break;
+    default:
+      break;
   }
 }

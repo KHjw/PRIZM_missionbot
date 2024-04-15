@@ -1,0 +1,9 @@
+#line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/sketch/.vscode/arduino.json"
+#line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/.vscode/arduino.json"
+{
+    "board": "arduino:avr:uno",
+    "port": "/dev/tty.usbserial-A907ZZ63",
+    "sketch": "PRIZM_missionbot.ino",
+    "output": "./ArduinoOutput",
+    "intelliSenseGen": "global"
+}

@@ -13,7 +13,6 @@
  /Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/variants/standard/pins_arduino.h \
  /Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/sketch/PRIZM_missionbot.h \
  /Users/kh_jinu/Documents/Arduino/libraries/TETRIX_PRIZM/PRIZM.h \
- /Users/kh_jinu/Documents/Arduino/libraries/SimpleTimer/SimpleTimer.h \
  /Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HUSKYLENS.h \
  /Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src/Wire.h \
  /Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/Stream.h \
