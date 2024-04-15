@@ -871,7 +871,7 @@ void canGrab() {
 void canApproach() {
   if (!isCanGrab) {
     StopFor(100);
-    if (ReturnSquareSize() > 1450) {
+    if (ReturnSquareSize() > 1400) {
       Serial.println(ReturnSquareSize());
       Serial.println((reinterpret_cast<const __FlashStringHelper *>(
 # 50 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino" 3

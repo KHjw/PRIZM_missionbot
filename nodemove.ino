@@ -199,3 +199,66 @@ void move_180() {
   TurnAround();
   StopFor(700);
 }
+
+//****************************** return home ******************************
+/**
+ * TurnRight();
+ * TurnLeft();
+ * TurnAround();
+ * GoForward(int velocity, int time);
+ * ㄴ 직진은 무조건 이 함수 사용
+ * StopFor(unsigned long time);
+ * ㄴ 정지도 무조건 이 함수 사용 ex)StopFor(0);
+ * prizm.setMotorPowers(1, 1);
+ * ㄴ 위 조합으로 불가능할 경우에만 추가로 사용
+ *
+ * 위 함수만을 사용할것
+ * 위 함수에 대한 내용은 motor.ino 참조할것
+ */
+
+void move_Exit(int exitNode) {
+  switch (exitNode) {
+    case NODE5:
+      switch (return_to) {
+        case GREEN:
+          break;
+        case RED:
+          break;
+        case BLUE:
+          break;
+        default:
+          break;
+      }
+      break;
+    case NODE9:
+      switch (return_to) {
+        case GREEN:
+          break;
+        case RED:
+          break;
+        case BLUE:
+          break;
+        default:
+          break;
+      }
+      break;
+    case NODE1:
+      switch (return_to) {
+        case GREEN:
+          break;
+        case RED:
+          break;
+        case BLUE:
+          break;
+        default:
+          break;
+      }
+      break;
+    case NODE5_v2:
+      break;
+    case NODE9_v2:
+      break;
+    default:
+      break;
+  }
+}

@@ -675,7 +675,7 @@ void canGrab() {
 void canApproach() {
   if (!isCanGrab) {
     StopFor(100);
-    if (ReturnSquareSize() > 1450) {
+    if (ReturnSquareSize() > detectSize) {
       Serial.println(ReturnSquareSize());
       Serial.println(F("!!!Can Approach!!!"));
       linetrace_analogSetting(0.7, 15, 40, 35);

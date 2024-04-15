@@ -14,6 +14,8 @@ int target_object = 0;
 int false_object = 0;
 int return_to = 0;
 
+#define detectSize 1400
+
 PRIZM prizm;
 
 void (*ptrCurrentMode)();  // 현재모드 함수 포인터
