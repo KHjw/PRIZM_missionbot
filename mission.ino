@@ -65,9 +65,8 @@ void MissionStart() {
 }
 
 void move_StartPos() {
-  // GoForward(80, 700);       // 첫 번째 intersection 지날때 까지 boost
+  move_1node();  // NODE1 으로 이동하기 위해 intersection 2번 이동
   move_1node();
-  move_1node();         // NODE1 으로 이동
   currentNODE = NODE1;  // 현재 위치 저장
   currnetNEWS = NORTH;  // 현재 방향 저장
   Serial.println(F(">>> At Starting Position"));

@@ -102,7 +102,7 @@ void intersectionDETECT();
 //****************************** huskylens SETUP ******************************
 HUSKYLENS huskylens;
 
-enum { COLA = 3, MONSTER = 1, TEA = 2 };
+enum { COLA = 3, TEA = 2, MONSTER = 1 };
 enum { GREEN = 1, RED, BLUE };
 
 //****************************** mission SETUP ******************************

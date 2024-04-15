@@ -26,38 +26,37 @@ void loop() {
 }
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/battry.ino"
 // robot State Check
-void battVoltagePrint(){
+void battVoltagePrint() {
   int battVoltage = prizm.readBatteryVoltage();
-  Serial.println("battVoltage : "+(String)(battVoltage/100)+"."+(String)(battVoltage%100)+"V");   // 현 배터리 전압 체크
+  Serial.println("battVoltage : " + (String)(battVoltage / 100) + "." +
+                 (String)(battVoltage % 100) + "V");  // 현 배터리 전압 체크
 }
 
-void battVoltagePrint(int time){
+void battVoltagePrint(int time) {
   int battVoltage = prizm.readBatteryVoltage();
-  Serial.println("battVoltage : "+(String)(battVoltage/100)+"."+(String)(battVoltage%100)+"V");   // 현 배터리 전압 체크
+  Serial.println("battVoltage : " + (String)(battVoltage / 100) + "." +
+                 (String)(battVoltage % 100) + "V");  // 현 배터리 전압 체크
   delay(time);
 }
 
-void setBattVoltage2(float setVoltage){
+void setBattVoltage2(float setVoltage) {
   int time = 5000;
   battVoltagePrint();
-  float battVoltage = prizm.readBatteryVoltage()/100.0;
-  if(battVoltage > setVoltage){
+  float battVoltage = prizm.readBatteryVoltage() / 100.0;
+  if (battVoltage > setVoltage) {
     Serial.print("> battVoltage TOO HIGH");
-    prizm.setMotorPowers(120,120);
-  }
-  else if(battVoltage < setVoltage-0.2){
+    prizm.setMotorPowers(120, 120);
+  } else if (battVoltage < setVoltage - 0.2) {
     delay(1000);
-    if(battVoltage >= setVoltage-0.2)
-      time = 500;
+    if (battVoltage >= setVoltage - 0.2) time = 500;
     Serial.print("> battVoltage TOO LOW :: CHARGE RECOMMENDED");
-    prizm.setMotorPowers(125,125);
-  }
-  else{
+    prizm.setMotorPowers(125, 125);
+  } else {
     Serial.print("> battVoltage JUST RIGHT");
-    prizm.setMotorPowers(125,125);
+    prizm.setMotorPowers(125, 125);
     time = 500;
   }
-  Serial.println("  Optimal setting : "+(String)(setVoltage));
+  Serial.println("  Optimal setting : " + (String)(setVoltage));
   delay(time);
 }
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
@@ -375,9 +374,8 @@ void MissionStart() {
 }
 
 void move_StartPos() {
-  // GoForward(80, 700);       // 첫 번째 intersection 지날때 까지 boost
+  move_1node();  // NODE1 으로 이동하기 위해 intersection 2번 이동
   move_1node();
-  move_1node();         // NODE1 으로 이동
   currentNODE = NODE1;  // 현재 위치 저장
   currnetNEWS = NORTH;  // 현재 방향 저장
   Serial.println(F(">>> At Starting Position"));
