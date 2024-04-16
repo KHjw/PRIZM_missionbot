@@ -80,6 +80,26 @@ void huskeylensInit() {
 }
 
 //****************************** check NODE ******************************
+void check_1NODE(int node) {
+  int SQ_size = ReturnSquareSize();
+  int CNT = 0;
+  while (SQ_size == 0) {
+    if (CNT >= 3) break;
+    CNT++;
+    delay(50);
+    SQ_size = ReturnSquareSize();
+    Serial.print(F("SquareSizeCNT : "));
+    Serial.println(CNT);
+  }
+  if (SQ_size > 100) {
+    if (isObjectTarget())
+      NODE_dataUpdate(node, 1);
+    else
+      NODE_dataUpdate(node, 2);
+  } else
+    NODE_dataUpdate(node, 0);
+}
+
 void check_1NODE_Far() {
   int ObjCNT = ReturnObjectCNT();
   int CNT = 0;
@@ -414,7 +434,8 @@ void check_NODE3() {
   GoForward(100, 500);
   Serial.println(F(">>> CHECK FUNC :: check_NODE3"));
   StopFor(0);
-  check_1NODE_Far();
+  check_1NODE(NODE3);
+  // check_1NODE_Far();
   switch (NODE_dataReturn(NODE3)) {
     case 1:
       Serial.println(F("NODE3 1"));
@@ -535,7 +556,8 @@ void check_NODE610() {
 }
 
 void check_NODE7() {
-  check_1NODE_Near();
+  check_1NODE(NODE7);
+  // check_1NODE_Near();
   switch (NODE_dataReturn(NODE7)) {
     case 1:
       NODE_movement("7,6,5");

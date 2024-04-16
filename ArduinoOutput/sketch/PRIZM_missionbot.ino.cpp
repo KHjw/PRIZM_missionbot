@@ -16,20 +16,22 @@ void setBattVoltage2(float setVoltage);
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 void huskeylensInit();
 #line 12 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+void check_1NODE(int node);
+#line 32 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 void check_1NODE_Far();
-#line 36 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
-void check_1NODE_Near();
 #line 56 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+void check_1NODE_Near();
+#line 76 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 void check_2NODE(int node_near, int node_far);
-#line 91 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 111 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 bool isObjectTarget();
-#line 107 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 127 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 int ReturnSquareSize();
-#line 131 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 151 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 int IdReturn();
-#line 155 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 175 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 int IdReturn_Closer();
-#line 178 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 198 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 int ReturnObjectCNT();
 #line 2 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
 void linetrace_analogPrint(int time);
@@ -51,11 +53,11 @@ void MissionStart();
 void move_StartPos();
 #line 71 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE3();
-#line 100 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 101 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE59();
-#line 154 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 155 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE610();
-#line 195 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 196 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE7();
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void motorInit();
@@ -200,6 +202,26 @@ void huskeylensInit() {
 }
 
 //****************************** check NODE ******************************
+void check_1NODE(int node) {
+  int SQ_size = ReturnSquareSize();
+  int CNT = 0;
+  while (SQ_size == 0) {
+    if (CNT >= 3) break;
+    CNT++;
+    delay(50);
+    SQ_size = ReturnSquareSize();
+    Serial.print(F("SquareSizeCNT : "));
+    Serial.println(CNT);
+  }
+  if (SQ_size > 100) {
+    if (isObjectTarget())
+      NODE_dataUpdate(node, 1);
+    else
+      NODE_dataUpdate(node, 2);
+  } else
+    NODE_dataUpdate(node, 0);
+}
+
 void check_1NODE_Far() {
   int ObjCNT = ReturnObjectCNT();
   int CNT = 0;
@@ -534,7 +556,8 @@ void check_NODE3() {
   GoForward(100, 500);
   Serial.println(F(">>> CHECK FUNC :: check_NODE3"));
   StopFor(0);
-  check_1NODE_Far();
+  check_1NODE(NODE3);
+  // check_1NODE_Far();
   switch (NODE_dataReturn(NODE3)) {
     case 1:
       Serial.println(F("NODE3 1"));
@@ -655,7 +678,8 @@ void check_NODE610() {
 }
 
 void check_NODE7() {
-  check_1NODE_Near();
+  check_1NODE(NODE7);
+  // check_1NODE_Near();
   switch (NODE_dataReturn(NODE7)) {
     case 1:
       NODE_movement("7,6,5");

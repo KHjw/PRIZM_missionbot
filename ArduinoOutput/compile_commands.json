@@ -68,17 +68,20 @@
  {
   "directory": "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot",
   "arguments": [
-   "/Users/kh_jinu/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-gcc",
+   "/Users/kh_jinu/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++",
    "-c",
    "-g",
    "-Os",
    "-w",
-   "-std=gnu11",
+   "-std=gnu++11",
+   "-fpermissive",
+   "-fno-exceptions",
    "-ffunction-sections",
    "-fdata-sections",
+   "-fno-threadsafe-statics",
+   "-Wno-error=narrowing",
    "-MMD",
    "-flto",
-   "-fno-fat-lto-objects",
    "-mmcu=atmega328p",
    "-DF_CPU=16000000L",
    "-DARDUINO=10607",
@@ -89,11 +92,11 @@
    "-I/Users/kh_jinu/Documents/Arduino/libraries/TETRIX_PRIZM",
    "-I/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS",
    "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
-   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HuskyLensProtocolCore.c",
+   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp",
    "-o",
-   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/HuskyLensProtocolCore.c.o"
+   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp.o"
   ],
-  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HuskyLensProtocolCore.c"
+  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp"
  },
  {
   "directory": "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot",
@@ -155,29 +158,26 @@
    "-I/Users/kh_jinu/Documents/Arduino/libraries/TETRIX_PRIZM",
    "-I/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS",
    "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
-   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp",
+   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HUSKYLENSMindPlus.cpp",
    "-o",
-   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp.o"
+   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/HUSKYLENSMindPlus.cpp.o"
   ],
-  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/DFRobot_HuskyLens.cpp"
+  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HUSKYLENSMindPlus.cpp"
  },
  {
   "directory": "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot",
   "arguments": [
-   "/Users/kh_jinu/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++",
+   "/Users/kh_jinu/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-gcc",
    "-c",
    "-g",
    "-Os",
    "-w",
-   "-std=gnu++11",
-   "-fpermissive",
-   "-fno-exceptions",
+   "-std=gnu11",
    "-ffunction-sections",
    "-fdata-sections",
-   "-fno-threadsafe-statics",
-   "-Wno-error=narrowing",
    "-MMD",
    "-flto",
+   "-fno-fat-lto-objects",
    "-mmcu=atmega328p",
    "-DF_CPU=16000000L",
    "-DARDUINO=10607",
@@ -188,11 +188,11 @@
    "-I/Users/kh_jinu/Documents/Arduino/libraries/TETRIX_PRIZM",
    "-I/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS",
    "-I/Users/kh_jinu/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
-   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HUSKYLENSMindPlus.cpp",
+   "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HuskyLensProtocolCore.c",
    "-o",
-   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/HUSKYLENSMindPlus.cpp.o"
+   "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/libraries/HUSKYLENS/HuskyLensProtocolCore.c.o"
   ],
-  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HUSKYLENSMindPlus.cpp"
+  "file": "/Users/kh_jinu/Documents/Arduino/libraries/HUSKYLENS/HuskyLensProtocolCore.c"
  },
  {
   "directory": "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot",

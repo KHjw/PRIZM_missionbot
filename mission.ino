@@ -72,7 +72,8 @@ void check_NODE3() {
   GoForward(100, 500);
   Serial.println(F(">>> CHECK FUNC :: check_NODE3"));
   StopFor(0);
-  check_1NODE_Far();
+  check_1NODE(NODE3);
+  // check_1NODE_Far();
   switch (NODE_dataReturn(NODE3)) {
     case 1:
       Serial.println(F("NODE3 1"));
@@ -193,7 +194,8 @@ void check_NODE610() {
 }
 
 void check_NODE7() {
-  check_1NODE_Near();
+  check_1NODE(NODE7);
+  // check_1NODE_Near();
   switch (NODE_dataReturn(NODE7)) {
     case 1:
       NODE_movement("7,6,5");
