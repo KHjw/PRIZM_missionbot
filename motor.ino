@@ -32,11 +32,11 @@ void canGrab() {
     if (prizm.readSonicSensorCM(4) <= canDetectCm) {
       Serial.println(F("!!!Can Detected!!!"));
       StopFor(50);
-      gripper_moveUP(1000);
+      gripper_moveUP(500);
       isCanGrab = true;
       NODE_dataUpdate(currentNODE, 1);
-      if (NODE_dataReturn(NODE11) == 1 || NODE_dataReturn(NODE5) == 1)
-        intersectionCNT == 1;
+      // if (NODE_dataReturn(NODE11) == 1 || NODE_dataReturn(NODE5) == 1)
+      if (NODE_dataReturn(NODE5) == 1) intersectionCNT == 1;
       StopFor(2000);
     }
   }
@@ -48,13 +48,17 @@ void canApproach() {
     if (ReturnSquareSize() > detectSize) {
       Serial.println(ReturnSquareSize());
       Serial.println(F("!!!Can Approach!!!"));
-      linetrace_analogSetting(0.7, 15, 40, 35);
+      linetrace_analogSetting(0.7, 10, 40, 35);
       while (!isCanGrab && intersectionCNT == 0) {
         canGrab();
-        intersectionDETECT();
+        if (!(NODE_dataReturn(NODE5) == 0 && NODE_dataReturn(NODE9) != 1))
+          intersectionDETECT();
         linetrace_analog();
+        if (intersectionCNT > 0) break;
       }
       linetrace_analogSetting(3.0, 60, 40, 35);
+      linetrace_analog();
+      linetrace_analog();
     } else
       Serial.println(ReturnSquareSize());
   }

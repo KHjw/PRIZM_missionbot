@@ -3,121 +3,6 @@
 #include "PRIZM_missionbot.h"
 
 //========================== main func ==========================
-#line 4 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino"
-void setup();
-#line 18 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino"
-void loop();
-#line 2 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/battry.ino"
-void battVoltagePrint();
-#line 8 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/battry.ino"
-void battVoltagePrint(int time);
-#line 15 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/battry.ino"
-void setBattVoltage2(float setVoltage);
-#line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
-void huskeylensInit();
-#line 9 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
-void check_1NODE_Far();
-#line 28 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
-void check_1NODE_Near();
-#line 47 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
-void check_2NODE(int node_near, int node_far);
-#line 75 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
-bool isObjectTarget();
-#line 94 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
-int ReturnSquareSize();
-#line 119 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
-int IdReturn();
-#line 141 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
-int IdReturn_Closer();
-#line 164 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
-int ReturnObjectCNT();
-#line 2 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
-void linetrace_analogPrint(int time);
-#line 18 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
-void linetrace_analog();
-#line 32 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
-void linetrace_analogSetting(float gainData, int default_speedData, int irDataMAXData);
-#line 44 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
-void linetrace_analogSetting(float gainData, int default_speedData, int irDataMAXData, int thresholdData);
-#line 57 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
-void intersectionDETECT();
-#line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
-void Get_Avoid_Return(int target_id, int false_id, int return_color);
-#line 59 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
-void MissionStart();
-#line 67 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
-void move_StartPos();
-#line 77 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
-void check_NODE3();
-#line 102 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
-void check_NODE59();
-#line 150 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
-void check_NODE610();
-#line 187 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
-void check_NODE7();
-#line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void motorInit();
-#line 12 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void gripper_openPOS();
-#line 17 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void gripper_closePOS();
-#line 22 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void gripper_moveUP(int time);
-#line 30 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void canGrab();
-#line 45 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void canApproach();
-#line 64 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void TurnRight();
-#line 71 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void TurnLeft();
-#line 78 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void TurnAround();
-#line 85 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void GoForward(int velocity, int time);
-#line 90 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void StopFor(unsigned long time);
-#line 95 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void TurnCalib();
-#line 108 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void return_from9();
-#line 116 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void return_from5();
-#line 124 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
-void return_from1();
-#line 2 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void NODE_to_Arr(int nodeNUM, int& row, int& col);
-#line 7 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-int NODE_dataReturn(int nodeNUM);
-#line 12 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void NODE_dataPrint(int nodeNUM);
-#line 23 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void NODE_dataUpdate(int nodeNUM, int data);
-#line 29 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-int NODE_convert(int node_num);
-#line 54 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void NODE_PrintAll();
-#line 68 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void NODE_move(int to);
-#line 70 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void NODE_move(int from, int to);
-#line 117 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void move_NEWS(int news);
-#line 141 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void NODE_movement(String input);
-#line 154 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void movement_parsing(String input);
-#line 173 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void move_1node();
-#line 182 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void move_right();
-#line 189 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void move_left();
-#line 196 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void move_180();
-#line 221 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
-void move_Exit(int exitNode);
-#line 4 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/PRIZM_missionbot.ino"
 void setup() {
   prizm.PrizmBegin();
   Serial.begin(115200);
@@ -127,7 +12,7 @@ void setup() {
   battVoltagePrint();
   linetrace_analogSetting(3.0, 60, 40, 35);
 
-  Get_Avoid_Return(COLA, TEA, GREEN);
+  Get_Avoid_Return(COLA, TEA, RED);
 
   Serial.print(F("\n\n[[[Setup Finish]]]\n\n"));  // 세팅완료 메시지
 }
@@ -136,11 +21,7 @@ void loop() {
   // battVoltagePrint(1000);
   // setBattVoltage2(12.8);  // 정상작동 배터리 전압 12.8 ~ 12.2
 
-  // MissionStart();
-  move_StartPos();
-  NODE_movement("2,3,7,6,5");
-  move_Exit(NODE5);
-  StopFor(100000);
+  MissionStart();
 }
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/battry.ino"
 // robot State Check
@@ -186,36 +67,81 @@ void huskeylensInit() {
   }
 }
 
+//****************************** check NODE ******************************
+// void check_1NODE_Far() {
+//   int sonic_data = 0;
+//   int checkNUM = 3;
+//   for (int i = 0; i < checkNUM; i++) {
+//     sonic_data = prizm.readSonicSensorCM(4);
+//     delay(100);
+//   }
+//   // sonic_data = sonic_data / checkNUM;
+//   Serial.print(F("sonic data : "));
+//   Serial.println(sonic_data);
+//   if (48 < sonic_data && sonic_data <= 58) {
+//     if (isObjectTarget())
+//       NODE_dataUpdate(NODE3, 1);
+//     else
+//       NODE_dataUpdate(NODE3, 2);
+//   } else
+//     NODE_dataUpdate(NODE3, 0);
+// }
+
 void check_1NODE_Far() {
-  int sonic_data = 0;
-  int checkNUM = 3;
-  for (int i = 0; i < checkNUM; i++) {
-    sonic_data += prizm.readSonicSensorCM(4);
+  int ObjCNT = ReturnObjectCNT();
+  int CNT = 0;
+  while (ObjCNT == 0) {
+    if (CNT > 10) break;
+    CNT++;
     delay(100);
+    ObjCNT = ReturnObjectCNT();
+    Serial.print(F("ObjcheckCNT : "));
+    Serial.println(CNT);
   }
-  sonic_data = sonic_data / checkNUM;
-  Serial.print(F("sonic data : "));
-  Serial.println(sonic_data);
-  if (48 < sonic_data && sonic_data <= 58) {
+  if (ObjCNT > 0) {
+    Serial.print(F("ReturnObjectCNT : "));
+    Serial.println(ReturnObjectCNT());
     if (isObjectTarget())
       NODE_dataUpdate(NODE3, 1);
     else
       NODE_dataUpdate(NODE3, 2);
-  } else
+  } else {
+    Serial.println(F("ReturnObjectCNT : 0"));
     NODE_dataUpdate(NODE3, 0);
+  }
 }
 
+// void check_1NODE_Near() {
+//   int sonic_data = 0;
+//   int checkNUM = 3;
+//   for (int i = 0; i < checkNUM; i++) {
+//     sonic_data = prizm.readSonicSensorCM(4);
+//     delay(100);
+//   }
+//   // sonic_data = sonic_data / checkNUM;
+//   Serial.print(F("sonic data : "));
+//   Serial.println(sonic_data);
+//   if (3 < sonic_data && sonic_data <= 15) {
+//     if (isObjectTarget())
+//       NODE_dataUpdate(NODE7, 1);
+//     else
+//       NODE_dataUpdate(NODE7, 2);
+//   } else
+//     NODE_dataUpdate(NODE7, 0);
+// }
+
 void check_1NODE_Near() {
-  int sonic_data = 0;
-  int checkNUM = 3;
-  for (int i = 0; i < checkNUM; i++) {
-    sonic_data += prizm.readSonicSensorCM(4);
+  int ObjCNT = ReturnObjectCNT();
+  int CNT = 0;
+  while (ObjCNT == 0) {
+    if (CNT > 10) break;
+    CNT++;
     delay(100);
+    ObjCNT = ReturnObjectCNT();
+    Serial.print(F("ObjcheckCNT : "));
+    Serial.println(CNT);
   }
-  sonic_data = sonic_data / checkNUM;
-  Serial.print(F("sonic data : "));
-  Serial.println(sonic_data);
-  if (3 < sonic_data && sonic_data <= 15) {
+  if (ObjCNT > 0) {
     if (isObjectTarget())
       NODE_dataUpdate(NODE7, 1);
     else
@@ -225,21 +151,26 @@ void check_1NODE_Near() {
 }
 
 void check_2NODE(int node_near, int node_far) {
-  int sonic_data = 0;
-  int checkNUM = 3;
-  for (int i = 0; i < checkNUM; i++) {
-    sonic_data += prizm.readSonicSensorCM(4);
+  int ObjCNT = ReturnObjectCNT();
+  int CNT = 0;
+  while (ObjCNT == 0) {
+    if (CNT >= 5) break;
+    CNT++;
     delay(100);
+    ObjCNT = ReturnObjectCNT();
+    Serial.print(F("ObjcheckCNT : "));
+    Serial.println(CNT);
   }
-  sonic_data = sonic_data / checkNUM;
-  Serial.print(F("sonic data : "));
-  Serial.println(sonic_data);
-  if (11 < sonic_data && sonic_data <= 19) {
+  int SQ_size = ReturnSquareSize();
+  Serial.print(F("ReturnSquareSize : "));
+
+  Serial.println(SQ_size);
+  if (SQ_size > 5000) {
     if (isObjectTarget())
       NODE_dataUpdate(node_near, 1);
     else
       NODE_dataUpdate(node_near, 2);
-  } else if (50 < sonic_data && sonic_data <= 60) {
+  } else if (ObjCNT > 0) {
     NODE_dataUpdate(node_near, 0);
     if (isObjectTarget())
       NODE_dataUpdate(node_far, 1);
@@ -252,9 +183,50 @@ void check_2NODE(int node_near, int node_far) {
   ptrCurrentMode = NODE_PrintAll;
 }
 
+// void check_2NODE2(int node_near, int node_far) {
+//   int sonic_data = 0;
+//   int checkNUM = 3;
+//   for (int i = 0; i < checkNUM; i++) {
+//     sonic_data = prizm.readSonicSensorCM(4);
+//     delay(100);
+//   }
+//   Serial.print(F("sonic data : "));
+//   Serial.println(sonic_data);
+//   if (11 < sonic_data && sonic_data <= 19) {
+//     if (isObjectTarget())
+//       NODE_dataUpdate(node_near, 1);
+//     else
+//       NODE_dataUpdate(node_near, 2);
+//   } else if (50 < sonic_data && sonic_data <= 60) {
+//     NODE_dataUpdate(node_near, 0);
+//     if (isObjectTarget())
+//       NODE_dataUpdate(node_far, 1);
+//     else
+//       NODE_dataUpdate(node_far, 2);
+//   } else {
+//     move_little(10);
+//     StopFor(1000);
+//     if (40 < sonic_data && sonic_data <= 50) {
+//       if (isObjectTarget())
+//         NODE_dataUpdate(node_far, 1);
+//       else
+//         NODE_dataUpdate(node_far, 2);
+//     }
+//     NODE_dataUpdate(node_near, 0);
+//     NODE_dataUpdate(node_far, 0);
+//     GoForward(-60, 200);
+//     StopFor(1000);
+//   }
+//   ptrCurrentMode = NODE_PrintAll;
+// }
+
+//****************************** object check ******************************
 bool isObjectTarget() {
   int id_detected = 0;
+  int CNT = 0;
   while (id_detected == 0) {
+    // CNT++;
+    // if (CNT > 5) break;
     if (ReturnObjectCNT() < 2) {
       Serial.print(F("Object CNT == 1 / "));
       id_detected = IdReturn();
@@ -307,10 +279,12 @@ int IdReturn() {
     while (huskylens.available()) {
       HUSKYLENSResult result = huskylens.read();
       if (result.command == COMMAND_RETURN_BLOCK) {
-        if (result.ID == 1 || result.ID == 2 || result.ID == 3) {
-          Serial.print(F("Block ID="));
-          Serial.println(result.ID);
-          return result.ID;
+        if (ReturnSquareSize() > 1000) {
+          if (result.ID == TEA || result.ID == COLA) {
+            Serial.print(F("Block ID="));
+            Serial.println(result.ID);
+            return result.ID;
+          }
         }
       }
     }
@@ -381,11 +355,8 @@ void linetrace_analog() {
   if (irData >
       irDataMAX) {  // irData 값이 비정상적으로 높을 때, irDataMAX로 보정
     irData = irDataMAX;
-    // Serial.print("irData calib -> ");
   }
   float sig = (irData - threshold) * gain;
-  // Serial.print((String)(irData)+ "
-  // ("+(String)(sig)+"/"+(String)(default_speed-sig)+"). ");
   prizm.setMotorPowers(default_speed - sig, default_speed + sig);
   delay(20);
 }
@@ -437,10 +408,6 @@ void Get_Avoid_Return(int target_id, int false_id, int return_color) {
       Serial.print(F("COLA"));
       servo_maxDEG = 57;
       break;
-    case MONSTER:
-      Serial.print(F("MONSTER"));
-      servo_maxDEG = 57;
-      break;
     case TEA:
       Serial.print(F("TEA"));
       servo_maxDEG = 54;
@@ -453,9 +420,6 @@ void Get_Avoid_Return(int target_id, int false_id, int return_color) {
   switch (false_object) {
     case COLA:
       Serial.print(F("COLA"));
-      break;
-    case MONSTER:
-      Serial.print(F("MONSTER"));
       break;
     case TEA:
       Serial.print(F("TEA"));
@@ -510,6 +474,7 @@ void check_NODE3() {
     case 1:
       Serial.println(F("NODE3 1"));
       NODE_movement("2,3,2");
+      move_Exit(NODE1);
       break;
     case 2:
       Serial.println(F("NODE3 2"));
@@ -539,12 +504,14 @@ void check_NODE59() {
       TurnLeft();
       currnetNEWS = NORTH;
       StopFor(200);
-      NODE_movement("2,6,7,11,10,9");  // exit 9
+      NODE_movement("2,6,7,11,10,9");
+      move_Exit(NODE9);
       break;
     case 0:
       switch (N9) {
-        case 1:
-          while (prizm.readSonicSensorCM(4) > 10) linetrace_analog();
+        case 1:  // ! 문제있음 수정필요
+          linetrace_analogSetting(2.0, 40, 40, 35);
+          while (prizm.readSonicSensorCM(4) > 15) linetrace_analog();
           canApproach();
           while (!isCanGrab) linetrace_analog();
           currentNODE = NODE9;  // 현재 위치 저장
@@ -555,6 +522,7 @@ void check_NODE59() {
           currnetNEWS = NORTH;
           StopFor(200);
           NODE_movement("2,3,7,11,10,6,5");
+          move_Exit(NODE5);
           break;
         case 0:
           TurnLeft();
@@ -587,6 +555,7 @@ void check_NODE610() {
       TurnLeft();
       currnetNEWS = NORTH;
       NODE_movement("3,7,11,10,9");
+      move_Exit(NODE9);
       break;
     case 0:
       switch (N10) {
@@ -595,6 +564,7 @@ void check_NODE610() {
           break;
         case 2:
           NODE_movement("6,7,11,7,6,5");
+          move_Exit(NODE5);
           break;
         case 0:
           NODE_movement("6");
@@ -616,6 +586,7 @@ void check_NODE7() {
   switch (NODE_dataReturn(NODE7)) {
     case 1:
       NODE_movement("7,6,5");
+      move_Exit(NODE5);
       break;
     case 2:
       GoForward(-40, 50);
@@ -627,6 +598,7 @@ void check_NODE7() {
       currentNODE = NODE11;
       currnetNEWS = SOUTH;
       NODE_movement("10,9");
+      move_Exit(NODE9);
       break;
     default:
       break;
@@ -668,11 +640,11 @@ void canGrab() {
     if (prizm.readSonicSensorCM(4) <= canDetectCm) {
       Serial.println(F("!!!Can Detected!!!"));
       StopFor(50);
-      gripper_moveUP(1000);
+      gripper_moveUP(500);
       isCanGrab = true;
       NODE_dataUpdate(currentNODE, 1);
-      if (NODE_dataReturn(NODE11) == 1 || NODE_dataReturn(NODE5) == 1)
-        intersectionCNT == 1;
+      // if (NODE_dataReturn(NODE11) == 1 || NODE_dataReturn(NODE5) == 1)
+      if (NODE_dataReturn(NODE5) == 1) intersectionCNT == 1;
       StopFor(2000);
     }
   }
@@ -684,13 +656,17 @@ void canApproach() {
     if (ReturnSquareSize() > detectSize) {
       Serial.println(ReturnSquareSize());
       Serial.println(F("!!!Can Approach!!!"));
-      linetrace_analogSetting(0.7, 15, 40, 35);
+      linetrace_analogSetting(0.7, 10, 40, 35);
       while (!isCanGrab && intersectionCNT == 0) {
         canGrab();
-        intersectionDETECT();
+        if (!(NODE_dataReturn(NODE5) == 0 && NODE_dataReturn(NODE9) != 1))
+          intersectionDETECT();
         linetrace_analog();
+        if (intersectionCNT > 0) break;
       }
       linetrace_analogSetting(3.0, 60, 40, 35);
+      linetrace_analog();
+      linetrace_analog();
     } else
       Serial.println(ReturnSquareSize());
   }
@@ -857,7 +833,6 @@ void NODE_move(int from, int to) {
   switch (row_move * 10 + col_move) {
     case 00:
       Serial.println(F("move : stay"));
-      StopFor(100000);
       break;
     case 01:
       Serial.println(F("move : EAST"));
@@ -906,6 +881,9 @@ void move_NEWS(int news) {
 
 //****************************** NODE movement ******************************
 void NODE_movement(String input) {
+  Serial.print(F("[[ NODE_movement : "));
+  Serial.print(input);
+  Serial.print(F(" ]]"));
   movement_parsing(input);
   int movetotalCNT = moveCNT;
   while (moveCNT > 0) {
@@ -945,6 +923,15 @@ void move_1node() {
   intersectionCNT = 0;
 }
 
+void move_little(int maxCNT) {
+  int CNT = 0;
+  while (CNT < maxCNT) {
+    linetrace_analog();
+    CNT++;
+  }
+  StopFor(100);
+}
+
 //****************************** simple move ******************************
 void move_right() {
   StopFor(200);
@@ -968,32 +955,25 @@ void move_180() {
 }
 
 //****************************** return home ******************************
-/**
- * TurnRight();
- * TurnLeft();
- * TurnAround();
- * GoForward(int velocity, int time);
- * ㄴ 직진은 무조건 이 함수 사용
- * StopFor(unsigned long time);
- * ㄴ 정지도 무조건 이 함수 사용 ex)StopFor(0);
- *
- * prizm.setMotorPowers(1, 1);
- * ㄴ 위 조합으로 불가능할 경우에만 추가로 사용
- *
- * 위 함수만을 사용할것
- * 위 함수에 대한 내용은 motor.ino 참조할것
- */
-
-// move_Exit(NODE9);
 void move_Exit(int exitNode) {
+  StopFor(500);
   switch (exitNode) {
     case NODE5:
       switch (return_to) {
         case GREEN:
+          prizm.setMotorPowers(40, -40);
+          delay(180);
+          StopFor(500);
+          GoForward(60, 1800);
           break;
         case RED:
+          GoForward(60, 2000);
           break;
         case BLUE:
+          prizm.setMotorPowers(-40, 40);
+          delay(180);
+          StopFor(500);
+          GoForward(60, 1800);
           break;
         default:
           break;
@@ -1002,11 +982,19 @@ void move_Exit(int exitNode) {
     case NODE9:
       switch (return_to) {
         case GREEN:
-
+          prizm.setMotorPowers(40, -40);
+          delay(370);
+          StopFor(500);
+          GoForward(60, 2500);
           break;
         case RED:
+          prizm.setMotorPowers(40, -40);
+          delay(300);
+          StopFor(500);
+          GoForward(60, 1900);
           break;
         case BLUE:
+          GoForward(60, 2000);
           break;
         default:
           break;
@@ -1017,8 +1005,20 @@ void move_Exit(int exitNode) {
         case GREEN:
           break;
         case RED:
+          GoForward(40, 1200);
+          StopFor(500);
+          prizm.setMotorPowers(-40, 40);
+          delay(700);
+          StopFor(0);
+          GoForward(60, 500);
           break;
         case BLUE:
+          GoForward(40, 1200);
+          StopFor(500);
+          prizm.setMotorPowers(-40, 40);
+          delay(700);
+          StopFor(0);
+          GoForward(60, 1200);
           break;
         default:
           break;

@@ -90,7 +90,6 @@ void NODE_move(int from, int to) {
   switch (row_move * 10 + col_move) {
     case 00:
       Serial.println(F("move : stay"));
-      StopFor(100000);
       break;
     case 01:
       Serial.println(F("move : EAST"));
@@ -139,6 +138,9 @@ void move_NEWS(int news) {
 
 //****************************** NODE movement ******************************
 void NODE_movement(String input) {
+  Serial.print(F("[[ NODE_movement : "));
+  Serial.print(input);
+  Serial.print(F(" ]]"));
   movement_parsing(input);
   int movetotalCNT = moveCNT;
   while (moveCNT > 0) {
@@ -178,6 +180,15 @@ void move_1node() {
   intersectionCNT = 0;
 }
 
+void move_little(int maxCNT) {
+  int CNT = 0;
+  while (CNT < maxCNT) {
+    linetrace_analog();
+    CNT++;
+  }
+  StopFor(100);
+}
+
 //****************************** simple move ******************************
 void move_right() {
   StopFor(200);
@@ -201,33 +212,25 @@ void move_180() {
 }
 
 //****************************** return home ******************************
-/**
- * TurnRight();
- * TurnLeft();
- * TurnAround();
- * GoForward(int velocity, int time);
- * ㄴ 직진은 무조건 이 함수 사용
- * StopFor(unsigned long time);
- * ㄴ 정지도 무조건 이 함수 사용 ex)StopFor(0);
- *
- * prizm.setMotorPowers(1, 1);
- * ㄴ 위 조합으로 불가능할 경우에만 추가로 사용
- *
- * 위 함수만을 사용할것
- * 위 함수에 대한 내용은 motor.ino 참조할것
- */
-
-// move_Exit(NODE9);
-
 void move_Exit(int exitNode) {
+  StopFor(500);
   switch (exitNode) {
     case NODE5:
       switch (return_to) {
         case GREEN:
+          prizm.setMotorPowers(40, -40);
+          delay(180);
+          StopFor(500);
+          GoForward(60, 1800);
           break;
         case RED:
+          GoForward(60, 2000);
           break;
         case BLUE:
+          prizm.setMotorPowers(-40, 40);
+          delay(180);
+          StopFor(500);
+          GoForward(60, 1800);
           break;
         default:
           break;
@@ -236,10 +239,19 @@ void move_Exit(int exitNode) {
     case NODE9:
       switch (return_to) {
         case GREEN:
+          prizm.setMotorPowers(40, -40);
+          delay(370);
+          StopFor(500);
+          GoForward(60, 2500);
           break;
         case RED:
+          prizm.setMotorPowers(40, -40);
+          delay(300);
+          StopFor(500);
+          GoForward(60, 1900);
           break;
         case BLUE:
+          GoForward(60, 2000);
           break;
         default:
           break;
@@ -250,8 +262,20 @@ void move_Exit(int exitNode) {
         case GREEN:
           break;
         case RED:
+          GoForward(40, 1200);
+          StopFor(500);
+          prizm.setMotorPowers(-40, 40);
+          delay(700);
+          StopFor(0);
+          GoForward(60, 500);
           break;
         case BLUE:
+          GoForward(40, 1200);
+          StopFor(500);
+          prizm.setMotorPowers(-40, 40);
+          delay(700);
+          StopFor(0);
+          GoForward(60, 1200);
           break;
         default:
           break;

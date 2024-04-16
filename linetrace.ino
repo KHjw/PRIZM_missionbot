@@ -20,11 +20,8 @@ void linetrace_analog() {
   if (irData >
       irDataMAX) {  // irData 값이 비정상적으로 높을 때, irDataMAX로 보정
     irData = irDataMAX;
-    // Serial.print("irData calib -> ");
   }
   float sig = (irData - threshold) * gain;
-  // Serial.print((String)(irData)+ "
-  // ("+(String)(sig)+"/"+(String)(default_speed-sig)+"). ");
   prizm.setMotorPowers(default_speed - sig, default_speed + sig);
   delay(20);
 }

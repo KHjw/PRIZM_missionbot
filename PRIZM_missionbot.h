@@ -14,7 +14,7 @@ int target_object = 0;
 int false_object = 0;
 int return_to = 0;
 
-#define detectSize 1400
+#define detectSize 500
 
 PRIZM prizm;
 
@@ -33,14 +33,14 @@ void voidFunc() {}
 void motorInit();
 
 // gripper 초기 각도 설정
-int servo1_openPOS = 110;  // servo1 열렸을때의 각도
-int servo2_openPOS = 35;   // servo2 열렸을때의 각도
-int servo3_downPOS = 90;   // servo3 내려갔을때의 각도
+#define servo1_openPOS 110  // servo1 열렸을때의 각도
+#define servo2_openPOS 35   // servo2 열렸을때의 각도
+#define servo3_downPOS 90   // servo3 내려갔을때의 각도
 
 int servo_maxDEG = 57;
 int servo1_closePOS = servo1_openPOS - servo_maxDEG;  // servo1 닫혔을때의 각도
 int servo2_closePOS = servo2_openPOS + servo_maxDEG;  // servo2 닫혔을때의 각도
-int servo3_upPOS = 30;  // servo3 올라갔을때의 각도
+#define servo3_upPOS 50  // servo3 올라갔을때의 각도
 
 // gripper
 #define canDetectCm 3
@@ -115,7 +115,7 @@ void intersectionDETECT();
 //****************************** huskylens SETUP ******************************
 HUSKYLENS huskylens;
 
-enum { COLA = 3, TEA = 2, MONSTER = 1 };
+enum { COLA = 3, TEA = 2 };
 enum { GREEN = 1, RED, BLUE };
 
 //****************************** mission SETUP ******************************

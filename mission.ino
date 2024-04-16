@@ -10,10 +10,6 @@ void Get_Avoid_Return(int target_id, int false_id, int return_color) {
       Serial.print(F("COLA"));
       servo_maxDEG = 57;
       break;
-    case MONSTER:
-      Serial.print(F("MONSTER"));
-      servo_maxDEG = 57;
-      break;
     case TEA:
       Serial.print(F("TEA"));
       servo_maxDEG = 54;
@@ -26,9 +22,6 @@ void Get_Avoid_Return(int target_id, int false_id, int return_color) {
   switch (false_object) {
     case COLA:
       Serial.print(F("COLA"));
-      break;
-    case MONSTER:
-      Serial.print(F("MONSTER"));
       break;
     case TEA:
       Serial.print(F("TEA"));
@@ -83,6 +76,7 @@ void check_NODE3() {
     case 1:
       Serial.println(F("NODE3 1"));
       NODE_movement("2,3,2");
+      move_Exit(NODE1);
       break;
     case 2:
       Serial.println(F("NODE3 2"));
@@ -112,12 +106,14 @@ void check_NODE59() {
       TurnLeft();
       currnetNEWS = NORTH;
       StopFor(200);
-      NODE_movement("2,6,7,11,10,9");  // exit 9
+      NODE_movement("2,6,7,11,10,9");
+      move_Exit(NODE9);
       break;
     case 0:
       switch (N9) {
-        case 1:
-          while (prizm.readSonicSensorCM(4) > 10) linetrace_analog();
+        case 1:  // ! 문제있음 수정필요
+          linetrace_analogSetting(2.0, 40, 40, 35);
+          while (prizm.readSonicSensorCM(4) > 15) linetrace_analog();
           canApproach();
           while (!isCanGrab) linetrace_analog();
           currentNODE = NODE9;  // 현재 위치 저장
@@ -128,6 +124,7 @@ void check_NODE59() {
           currnetNEWS = NORTH;
           StopFor(200);
           NODE_movement("2,3,7,11,10,6,5");
+          move_Exit(NODE5);
           break;
         case 0:
           TurnLeft();
@@ -160,6 +157,7 @@ void check_NODE610() {
       TurnLeft();
       currnetNEWS = NORTH;
       NODE_movement("3,7,11,10,9");
+      move_Exit(NODE9);
       break;
     case 0:
       switch (N10) {
@@ -168,6 +166,7 @@ void check_NODE610() {
           break;
         case 2:
           NODE_movement("6,7,11,7,6,5");
+          move_Exit(NODE5);
           break;
         case 0:
           NODE_movement("6");
@@ -189,6 +188,7 @@ void check_NODE7() {
   switch (NODE_dataReturn(NODE7)) {
     case 1:
       NODE_movement("7,6,5");
+      move_Exit(NODE5);
       break;
     case 2:
       GoForward(-40, 50);
@@ -200,6 +200,7 @@ void check_NODE7() {
       currentNODE = NODE11;
       currnetNEWS = SOUTH;
       NODE_movement("10,9");
+      move_Exit(NODE9);
       break;
     default:
       break;
