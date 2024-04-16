@@ -10,7 +10,7 @@ void setup() {
   battVoltagePrint();
   linetrace_analogSetting(3.0, 60, 40, 35);
 
-  Get_Avoid_Return(COLA, TEA, GREEN);
+  Get_Avoid_Return(TEA, COLA, GREEN);
 
   Serial.print(F("\n\n[[[Setup Finish]]]\n\n"));  // 세팅완료 메시지
 }
@@ -19,7 +19,5 @@ void loop() {
   // battVoltagePrint(1000);
   // setBattVoltage2(12.8);  // 정상작동 배터리 전압 12.8 ~ 12.2
 
-  // MissionStart();
-  move_StartPos();
-  check_NODE3();
+  MissionStart();
 }

@@ -39,25 +39,25 @@ void linetrace_analogPrint(int time);
 void linetrace_analog();
 #line 27 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
 void linetrace_analog(int CNTmax);
-#line 42 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+#line 43 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
 void linetrace_analogSetting(float gainData, int default_speedData, int irDataMAXData);
-#line 54 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+#line 55 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
 void linetrace_analogSetting(float gainData, int default_speedData, int irDataMAXData, int thresholdData);
-#line 67 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
+#line 68 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
 void intersectionDETECT();
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void Get_Avoid_Return(int target_id, int false_id, int return_color);
-#line 52 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 54 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void MissionStart();
-#line 61 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 63 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void move_StartPos();
-#line 71 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 73 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE3();
-#line 101 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 103 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE59();
-#line 155 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 159 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE610();
-#line 196 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 202 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE7();
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void motorInit();
@@ -71,25 +71,25 @@ void gripper_moveUP(int time);
 void canGrab();
 #line 44 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void canApproach();
-#line 66 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 68 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void canDrop();
-#line 73 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 75 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void TurnRight();
-#line 80 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 82 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void TurnLeft();
-#line 87 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 89 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void TurnAround();
-#line 94 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 96 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void GoForward(int velocity, int time);
-#line 99 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 101 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void StopFor(unsigned long time);
-#line 104 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 106 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void TurnCalib();
-#line 117 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 119 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void return_from9();
-#line 125 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 127 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void return_from5();
-#line 133 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 135 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void return_from1();
 #line 2 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
 void NODE_to_Arr(int nodeNUM, int& row, int& col);
@@ -135,7 +135,7 @@ void setup() {
   battVoltagePrint();
   linetrace_analogSetting(3.0, 60, 40, 35);
 
-  Get_Avoid_Return(COLA, TEA, GREEN);
+  Get_Avoid_Return(TEA, COLA, GREEN);
 
   Serial.print(F("\n\n[[[Setup Finish]]]\n\n"));  // 세팅완료 메시지
 }
@@ -144,9 +144,7 @@ void loop() {
   // battVoltagePrint(1000);
   // setBattVoltage2(12.8);  // 정상작동 배터리 전압 12.8 ~ 12.2
 
-  // MissionStart();
-  move_StartPos();
-  check_NODE3();
+  MissionStart();
 }
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/battry.ino"
 // robot State Check
@@ -434,8 +432,9 @@ void linetrace_analog() {
 
 void linetrace_analog(int CNTmax) {
   int CNT = 0;
-  while (CNT <= CNTmax) {
+  while (1) {
     CNT++;
+    if (CNT <= CNTmax) break;
     Serial.print(F("linetrace_analog CNT : "));
     Serial.println(CNT);
     int irData = analogRead(A1);
@@ -493,10 +492,12 @@ void Get_Avoid_Return(int target_id, int false_id, int return_color) {
     case COLA:
       Serial.print(F("COLA"));
       servo_maxDEG = 56;
+      canDetectCm = 3;
       break;
     case TEA:
       Serial.print(F("TEA"));
       servo_maxDEG = 54;
+      canDetectCm = 2;
       break;
     default:
       Serial.print(F("???"));
@@ -537,8 +538,8 @@ void MissionStart() {
   Serial.println(F("Mission Start!!!"));
   move_StartPos();
   check_NODE3();
-  NODE_PrintAll();
   canDrop();
+  NODE_PrintAll();
   StopFor(1000000);
 }
 
@@ -603,13 +604,15 @@ void check_NODE59() {
       break;
     case 0:
       switch (N9) {
-        case 1:  // ! 문제있음 수정필요
-          linetrace_analogSetting(2.0, 40, 40, 35);
+        case 1:
+          StopFor(1000);
           while (prizm.readSonicSensorCM(4) > 15) linetrace_analog();
-          canApproach();
-          StopFor(500);
           currentNODE = NODE9;  // 현재 위치 저장
           currnetNEWS = EAST;   // 현재 방향 저장
+          canApproach();
+          move_right();
+          GoForward(-60, 800);
+          move_Exit(NODE9);
           break;
         case 2:
           TurnLeft();
@@ -639,8 +642,6 @@ void check_NODE59() {
 void check_NODE610() {
   Serial.println(F(">>> CHECK FUNC :: check_NODE6,10"));
   check_2NODE(NODE6, NODE10);
-  NODE_PrintAll();   // ! 디버그용
-  StopFor(1000000);  // ! 디버그용 멈춤
   int N6 = NODE_dataReturn(NODE6);
   int N10 = NODE_dataReturn(NODE10);
   switch (N6) {
@@ -656,7 +657,11 @@ void check_NODE610() {
     case 0:
       switch (N10) {
         case 1:
-          NODE_movement("6,10,9");
+          move_1node();
+          currentNODE = NODE6;  // 현재 위치 저장
+          currnetNEWS = EAST;   // 현재 방향 저장
+          NODE_movement("10,9");
+          move_Exit(NODE9);
           break;
         case 2:
           NODE_movement("6,7,11,7,6,5");
@@ -707,7 +712,7 @@ void motorInit() {
   prizm.setMotorInvert(1, 1);
   prizm.setServoSpeed(1, 60);
   prizm.setServoSpeed(2, 60);
-  prizm.setServoSpeed(3, 10);
+  prizm.setServoSpeed(3, 60);
 
   gripper_openPOS();
 }
@@ -736,12 +741,12 @@ void canGrab() {
     if (prizm.readSonicSensorCM(4) <= canDetectCm) {
       Serial.println(F("!!!Can Detected!!!"));
       StopFor(50);
-      gripper_moveUP(500);
+      gripper_moveUP(100);
       isCanGrab = true;
       NODE_dataUpdate(currentNODE, 1);
       // if (NODE_dataReturn(NODE11) == 1 || NODE_dataReturn(NODE5) == 1)
       if (NODE_dataReturn(NODE5) == 1) intersectionCNT == 1;
-      StopFor(2000);
+      StopFor(1000);
     }
   }
 }
@@ -758,11 +763,13 @@ void canApproach() {
         canGrab();
         if (!(NODE_dataReturn(NODE5) == 0 && NODE_dataReturn(NODE9) != 1))
           intersectionDETECT();
-        linetrace_analog();
         if (intersectionCNT > 0) break;
+        linetrace_analog();
       }
       linetrace_analogSetting(3.0, 60, 40, 35);
-      linetrace_analog(2);
+      if (!(NODE_dataReturn(NODE3) == 0 && NODE_dataReturn(NODE5) == 0 &&
+            NODE_dataReturn(NODE9) == 1))
+        linetrace_analog(2);
     } else
       Serial.println(ReturnSquareSize());
   }
@@ -1057,9 +1064,11 @@ void move_180() {
 
 //****************************** return home ******************************
 void move_Exit(int exitNode) {
+  Serial.print(F("EXIT SEQUENCE ACTIVATED : "));
   StopFor(500);
   switch (exitNode) {
     case NODE5:
+      Serial.println(F("Exit NODE5"));
       switch (return_to) {
         case GREEN:
           prizm.setMotorPowers(40, -40);
@@ -1081,6 +1090,7 @@ void move_Exit(int exitNode) {
       }
       break;
     case NODE9:
+      Serial.println(F("Exit NODE9"));
       switch (return_to) {
         case GREEN:
           prizm.setMotorPowers(40, -40);
@@ -1102,6 +1112,7 @@ void move_Exit(int exitNode) {
       }
       break;
     case NODE1:
+      Serial.println(F("Exit NODE1"));
       switch (return_to) {
         case GREEN:
           break;

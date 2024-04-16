@@ -43,7 +43,7 @@ int servo2_closePOS = servo2_openPOS + servo_maxDEG;  // servo2 닫혔을때의 
 #define servo3_upPOS 50  // servo3 올라갔을때의 각도
 
 // gripper
-#define canDetectCm 3
+int canDetectCm = 3;
 #define canApproachCm 15
 
 bool isCanGrab = false;

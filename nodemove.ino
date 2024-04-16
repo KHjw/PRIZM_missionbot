@@ -212,9 +212,11 @@ void move_180() {
 
 //****************************** return home ******************************
 void move_Exit(int exitNode) {
+  Serial.print(F("EXIT SEQUENCE ACTIVATED : "));
   StopFor(500);
   switch (exitNode) {
     case NODE5:
+      Serial.println(F("Exit NODE5"));
       switch (return_to) {
         case GREEN:
           prizm.setMotorPowers(40, -40);
@@ -236,6 +238,7 @@ void move_Exit(int exitNode) {
       }
       break;
     case NODE9:
+      Serial.println(F("Exit NODE9"));
       switch (return_to) {
         case GREEN:
           prizm.setMotorPowers(40, -40);
@@ -257,6 +260,7 @@ void move_Exit(int exitNode) {
       }
       break;
     case NODE1:
+      Serial.println(F("Exit NODE1"));
       switch (return_to) {
         case GREEN:
           break;
