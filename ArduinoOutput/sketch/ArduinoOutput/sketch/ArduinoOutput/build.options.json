@@ -1,0 +1,13 @@
+#line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/sketch/ArduinoOutput/build.options.json"
+#line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/ArduinoOutput/build.options.json"
+{
+  "additionalFiles": "../../..,../../..,../../..,../../..,../../..,../../../../..,../../../../..,../../../../..,../../../../..,../../../..,../..,../..",
+  "builtInToolsFolders": "",
+  "compiler.optimization_flags": "",
+  "customBuildProperties": "",
+  "fqbn": "arduino:avr:uno",
+  "hardwareFolders": "/Users/kh_jinu/Library/Arduino15/packages",
+  "otherLibrariesFolders": "/Users/kh_jinu/Documents/Arduino/libraries",
+  "runtime.ide.version": "10607",
+  "sketchLocation": "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot"
+}

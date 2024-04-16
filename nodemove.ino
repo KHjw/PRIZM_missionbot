@@ -154,8 +154,7 @@ void NODE_movement(String input) {
 }
 
 void movement_parsing(String input) {
-  int index = 0;  // 배열 인덱스 초기화
-
+  int index = 0;                 // 배열 인덱스 초기화
   int pos = input.indexOf(',');  // 쉼표로 구분된 숫자 추출
   while (pos != -1 && moveCNT < 15) {
     moveArr[moveCNT++] =
@@ -280,10 +279,6 @@ void move_Exit(int exitNode) {
         default:
           break;
       }
-      break;
-    case NODE5_v2:
-      break;
-    case NODE9_v2:
       break;
     default:
       break;

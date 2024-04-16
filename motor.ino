@@ -45,8 +45,9 @@ void canGrab() {
 void canApproach() {
   if (!isCanGrab) {
     StopFor(100);
-    if (ReturnSquareSize() > detectSize) {
-      Serial.println(ReturnSquareSize());
+    int SQ_size = ReturnSquareSize();
+    if (SQ_size > detectSize) {
+      Serial.println(SQ_size);
       Serial.println(F("!!!Can Approach!!!"));
       linetrace_analogSetting(0.7, 10, 40, 35);
       while (!isCanGrab && intersectionCNT == 0) {
@@ -57,11 +58,16 @@ void canApproach() {
         if (intersectionCNT > 0) break;
       }
       linetrace_analogSetting(3.0, 60, 40, 35);
-      linetrace_analog();
-      linetrace_analog();
+      linetrace_analog(2);
     } else
       Serial.println(ReturnSquareSize());
   }
+}
+
+void canDrop() {
+  StopFor(200);
+  Serial.println(F("canDrop!!!"));
+  gripper_openPOS();
 }
 
 //****************************** move mode ******************************

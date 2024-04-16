@@ -2,44 +2,26 @@ void huskeylensInit() {
   Wire.begin();
   while (!huskylens.begin(Wire)) {
     Serial.println(F("Begin failed!"));
+    gripper_closePOS();
     delay(100);
   }
 }
 
 //****************************** check NODE ******************************
-// void check_1NODE_Far() {
-//   int sonic_data = 0;
-//   int checkNUM = 3;
-//   for (int i = 0; i < checkNUM; i++) {
-//     sonic_data = prizm.readSonicSensorCM(4);
-//     delay(100);
-//   }
-//   // sonic_data = sonic_data / checkNUM;
-//   Serial.print(F("sonic data : "));
-//   Serial.println(sonic_data);
-//   if (48 < sonic_data && sonic_data <= 58) {
-//     if (isObjectTarget())
-//       NODE_dataUpdate(NODE3, 1);
-//     else
-//       NODE_dataUpdate(NODE3, 2);
-//   } else
-//     NODE_dataUpdate(NODE3, 0);
-// }
-
 void check_1NODE_Far() {
   int ObjCNT = ReturnObjectCNT();
   int CNT = 0;
   while (ObjCNT == 0) {
-    if (CNT > 10) break;
+    if (CNT >= 10) break;
     CNT++;
-    delay(100);
+    delay(50);
     ObjCNT = ReturnObjectCNT();
     Serial.print(F("ObjcheckCNT : "));
     Serial.println(CNT);
   }
   if (ObjCNT > 0) {
     Serial.print(F("ReturnObjectCNT : "));
-    Serial.println(ReturnObjectCNT());
+    Serial.println(ObjCNT);
     if (isObjectTarget())
       NODE_dataUpdate(NODE3, 1);
     else
@@ -50,32 +32,13 @@ void check_1NODE_Far() {
   }
 }
 
-// void check_1NODE_Near() {
-//   int sonic_data = 0;
-//   int checkNUM = 3;
-//   for (int i = 0; i < checkNUM; i++) {
-//     sonic_data = prizm.readSonicSensorCM(4);
-//     delay(100);
-//   }
-//   // sonic_data = sonic_data / checkNUM;
-//   Serial.print(F("sonic data : "));
-//   Serial.println(sonic_data);
-//   if (3 < sonic_data && sonic_data <= 15) {
-//     if (isObjectTarget())
-//       NODE_dataUpdate(NODE7, 1);
-//     else
-//       NODE_dataUpdate(NODE7, 2);
-//   } else
-//     NODE_dataUpdate(NODE7, 0);
-// }
-
 void check_1NODE_Near() {
   int ObjCNT = ReturnObjectCNT();
   int CNT = 0;
   while (ObjCNT == 0) {
-    if (CNT > 10) break;
+    if (CNT >= 5) break;
     CNT++;
-    delay(100);
+    delay(50);
     ObjCNT = ReturnObjectCNT();
     Serial.print(F("ObjcheckCNT : "));
     Serial.println(CNT);
@@ -90,31 +53,32 @@ void check_1NODE_Near() {
 }
 
 void check_2NODE(int node_near, int node_far) {
-  int ObjCNT = ReturnObjectCNT();
-  int CNT = 0;
-  while (ObjCNT == 0) {
-    if (CNT >= 5) break;
-    CNT++;
-    delay(100);
-    ObjCNT = ReturnObjectCNT();
-    Serial.print(F("ObjcheckCNT : "));
-    Serial.println(CNT);
-  }
   int SQ_size = ReturnSquareSize();
   Serial.print(F("ReturnSquareSize : "));
-
   Serial.println(SQ_size);
-  if (SQ_size > 5000) {
+  if (SQ_size >= 5000) {
     if (isObjectTarget())
       NODE_dataUpdate(node_near, 1);
     else
       NODE_dataUpdate(node_near, 2);
-  } else if (ObjCNT > 0) {
+  } else if (SQ_size >= 500 && SQ_size < 5000) {
     NODE_dataUpdate(node_near, 0);
-    if (isObjectTarget())
-      NODE_dataUpdate(node_far, 1);
-    else
-      NODE_dataUpdate(node_far, 2);
+    int ObjCNT = ReturnObjectCNT();
+    int CNT = 0;
+    while (ObjCNT == 0) {
+      CNT++;
+      if (CNT > 5) break;
+      delay(100);
+      ObjCNT = ReturnObjectCNT();
+      Serial.print(F("ObjcheckCNT : "));
+      Serial.println(CNT);
+    }
+    if (ObjCNT > 0) {
+      if (isObjectTarget())
+        NODE_dataUpdate(node_far, 1);
+      else
+        NODE_dataUpdate(node_far, 2);
+    }
   } else {
     NODE_dataUpdate(node_near, 0);
     NODE_dataUpdate(node_far, 0);
@@ -122,57 +86,14 @@ void check_2NODE(int node_near, int node_far) {
   ptrCurrentMode = NODE_PrintAll;
 }
 
-// void check_2NODE2(int node_near, int node_far) {
-//   int sonic_data = 0;
-//   int checkNUM = 3;
-//   for (int i = 0; i < checkNUM; i++) {
-//     sonic_data = prizm.readSonicSensorCM(4);
-//     delay(100);
-//   }
-//   Serial.print(F("sonic data : "));
-//   Serial.println(sonic_data);
-//   if (11 < sonic_data && sonic_data <= 19) {
-//     if (isObjectTarget())
-//       NODE_dataUpdate(node_near, 1);
-//     else
-//       NODE_dataUpdate(node_near, 2);
-//   } else if (50 < sonic_data && sonic_data <= 60) {
-//     NODE_dataUpdate(node_near, 0);
-//     if (isObjectTarget())
-//       NODE_dataUpdate(node_far, 1);
-//     else
-//       NODE_dataUpdate(node_far, 2);
-//   } else {
-//     move_little(10);
-//     StopFor(1000);
-//     if (40 < sonic_data && sonic_data <= 50) {
-//       if (isObjectTarget())
-//         NODE_dataUpdate(node_far, 1);
-//       else
-//         NODE_dataUpdate(node_far, 2);
-//     }
-//     NODE_dataUpdate(node_near, 0);
-//     NODE_dataUpdate(node_far, 0);
-//     GoForward(-60, 200);
-//     StopFor(1000);
-//   }
-//   ptrCurrentMode = NODE_PrintAll;
-// }
-
 //****************************** object check ******************************
 bool isObjectTarget() {
   int id_detected = 0;
   int CNT = 0;
   while (id_detected == 0) {
-    // CNT++;
-    // if (CNT > 5) break;
-    if (ReturnObjectCNT() < 2) {
-      Serial.print(F("Object CNT == 1 / "));
-      id_detected = IdReturn();
-    } else {
-      Serial.print(F("Object CNT >= 2 / "));
-      id_detected = IdReturn_Closer();
-    }
+    CNT++;
+    if (CNT > 5) break;
+    id_detected = IdReturn_Closer();
   }
   Serial.print(F("detected id : "));
   Serial.println(id_detected);
@@ -184,7 +105,6 @@ bool isObjectTarget() {
 
 int ReturnSquareSize() {
   int zeroCount = 0;  // 인식된 객체가 없는 상황을 카운트하는 변수
-
   while (true) {
     if (!huskylens.request() || !huskylens.isLearned() ||
         !huskylens.available()) {

@@ -17,13 +17,26 @@ void linetrace_analogPrint(int time) {
 
 void linetrace_analog() {
   int irData = analogRead(A1);
-  if (irData >
-      irDataMAX) {  // irData 값이 비정상적으로 높을 때, irDataMAX로 보정
-    irData = irDataMAX;
-  }
+  // irData 값이 비정상적으로 높을 때, irDataMAX로 보정
+  if (irData > irDataMAX) irData = irDataMAX;
   float sig = (irData - threshold) * gain;
   prizm.setMotorPowers(default_speed - sig, default_speed + sig);
   delay(20);
+}
+
+void linetrace_analog(int CNTmax) {
+  int CNT = 0;
+  while (CNT <= CNTmax) {
+    CNT++;
+    Serial.print(F("linetrace_analog CNT : "));
+    Serial.println(CNT);
+    int irData = analogRead(A1);
+    // irData 값이 비정상적으로 높을 때, irDataMAX로 보정
+    if (irData > irDataMAX) irData = irDataMAX;
+    float sig = (irData - threshold) * gain;
+    prizm.setMotorPowers(default_speed - sig, default_speed + sig);
+    delay(20);
+  }
 }
 
 void linetrace_analogSetting(float gainData, int default_speedData,

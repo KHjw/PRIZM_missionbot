@@ -8,7 +8,7 @@ void Get_Avoid_Return(int target_id, int false_id, int return_color) {
   switch (target_object) {
     case COLA:
       Serial.print(F("COLA"));
-      servo_maxDEG = 57;
+      servo_maxDEG = 56;
       break;
     case TEA:
       Serial.print(F("TEA"));
@@ -54,6 +54,7 @@ void MissionStart() {
   move_StartPos();
   check_NODE3();
   NODE_PrintAll();
+  canDrop();
   StopFor(1000000);
 }
 
@@ -81,6 +82,9 @@ void check_NODE3() {
     case 2:
       Serial.println(F("NODE3 2"));
       NODE_movement("2,6,7,11,10,9,5");
+      move_left();
+      GoForward(-60, 800);
+      move_Exit(NODE5);
       break;
     case 0:
       TurnRight();
@@ -101,6 +105,9 @@ void check_NODE59() {
   switch (N5) {
     case 1:
       NODE_movement("5");
+      move_right();
+      GoForward(-60, 800);
+      move_Exit(NODE5);
       break;
     case 2:
       TurnLeft();
@@ -115,7 +122,7 @@ void check_NODE59() {
           linetrace_analogSetting(2.0, 40, 40, 35);
           while (prizm.readSonicSensorCM(4) > 15) linetrace_analog();
           canApproach();
-          while (!isCanGrab) linetrace_analog();
+          StopFor(500);
           currentNODE = NODE9;  // 현재 위치 저장
           currnetNEWS = EAST;   // 현재 방향 저장
           break;
@@ -149,6 +156,8 @@ void check_NODE610() {
   check_2NODE(NODE6, NODE10);
   int N6 = NODE_dataReturn(NODE6);
   int N10 = NODE_dataReturn(NODE10);
+  NODE_PrintAll();   // ! 디버그용
+  StopFor(1000000);  // ! 디버그용 멈춤
   switch (N6) {
     case 1:
       NODE_movement("6,5");
