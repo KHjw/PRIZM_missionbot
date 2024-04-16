@@ -8,8 +8,8 @@ void setup() {
   prizm.PrizmBegin();
   Serial.begin(115200);
   Serial.print(F("\n\n[[[Setup Start]]]\n\n"));  // 세팅완료 메시지
-  motorInit();
   huskeylensInit();
+  motorInit();
   battVoltagePrint();
   linetrace_analogSetting(3.0, 60, 40, 35);
 
@@ -76,6 +76,7 @@ void huskeylensInit() {
     gripper_closePOS();
     delay(100);
   }
+  gripper_openPOS();
 }
 
 //****************************** check NODE ******************************
@@ -132,7 +133,7 @@ void check_2NODE(int node_near, int node_far) {
       NODE_dataUpdate(node_near, 1);
     else
       NODE_dataUpdate(node_near, 2);
-  } else if (SQ_size >= 500 && SQ_size < 5000) {
+  } else if (SQ_size >= 100 && SQ_size < 5000) {
     NODE_dataUpdate(node_near, 0);
     int ObjCNT = ReturnObjectCNT();
     int CNT = 0;
@@ -495,10 +496,10 @@ void check_NODE59() {
 void check_NODE610() {
   Serial.println(F(">>> CHECK FUNC :: check_NODE6,10"));
   check_2NODE(NODE6, NODE10);
-  int N6 = NODE_dataReturn(NODE6);
-  int N10 = NODE_dataReturn(NODE10);
   NODE_PrintAll();   // ! 디버그용
   StopFor(1000000);  // ! 디버그용 멈춤
+  int N6 = NODE_dataReturn(NODE6);
+  int N10 = NODE_dataReturn(NODE10);
   switch (N6) {
     case 1:
       NODE_movement("6,5");
@@ -560,7 +561,6 @@ void check_NODE7() {
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void motorInit() {
   prizm.setMotorInvert(1, 1);
-
   prizm.setServoSpeed(1, 60);
   prizm.setServoSpeed(2, 60);
   prizm.setServoSpeed(3, 10);
@@ -841,7 +841,7 @@ void move_NEWS(int news) {
 void NODE_movement(String input) {
   Serial.print(F("[[ NODE_movement : "));
   Serial.print(input);
-  Serial.print(F(" ]]"));
+  Serial.println(F(" ]]"));
   movement_parsing(input);
   int movetotalCNT = moveCNT;
   while (moveCNT > 0) {

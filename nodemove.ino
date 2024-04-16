@@ -140,7 +140,7 @@ void move_NEWS(int news) {
 void NODE_movement(String input) {
   Serial.print(F("[[ NODE_movement : "));
   Serial.print(input);
-  Serial.print(F(" ]]"));
+  Serial.println(F(" ]]"));
   movement_parsing(input);
   int movetotalCNT = moveCNT;
   while (moveCNT > 0) {

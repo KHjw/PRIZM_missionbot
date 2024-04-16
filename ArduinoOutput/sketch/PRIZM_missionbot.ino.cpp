@@ -15,21 +15,21 @@ void battVoltagePrint(int time);
 void setBattVoltage2(float setVoltage);
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 void huskeylensInit();
-#line 11 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 12 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 void check_1NODE_Far();
-#line 35 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 36 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 void check_1NODE_Near();
-#line 55 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 56 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 void check_2NODE(int node_near, int node_far);
-#line 90 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 91 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 bool isObjectTarget();
-#line 106 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 107 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 int ReturnSquareSize();
-#line 130 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 131 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 int IdReturn();
-#line 154 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 155 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 int IdReturn_Closer();
-#line 177 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
+#line 178 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/huskylens.ino"
 int ReturnObjectCNT();
 #line 2 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/linetrace.ino"
 void linetrace_analogPrint(int time);
@@ -59,35 +59,35 @@ void check_NODE610();
 void check_NODE7();
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void motorInit();
-#line 12 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 11 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void gripper_openPOS();
-#line 17 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 16 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void gripper_closePOS();
-#line 22 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 21 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void gripper_moveUP(int time);
-#line 30 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 29 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void canGrab();
-#line 45 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 44 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void canApproach();
-#line 67 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 66 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void canDrop();
-#line 74 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 73 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void TurnRight();
-#line 81 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 80 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void TurnLeft();
-#line 88 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 87 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void TurnAround();
-#line 95 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 94 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void GoForward(int velocity, int time);
-#line 100 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 99 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void StopFor(unsigned long time);
-#line 105 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 104 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void TurnCalib();
-#line 118 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 117 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void return_from9();
-#line 126 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 125 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void return_from5();
-#line 134 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
+#line 133 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void return_from1();
 #line 2 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/nodemove.ino"
 void NODE_to_Arr(int nodeNUM, int& row, int& col);
@@ -128,8 +128,8 @@ void setup() {
   prizm.PrizmBegin();
   Serial.begin(115200);
   Serial.print(F("\n\n[[[Setup Start]]]\n\n"));  // 세팅완료 메시지
-  motorInit();
   huskeylensInit();
+  motorInit();
   battVoltagePrint();
   linetrace_analogSetting(3.0, 60, 40, 35);
 
@@ -196,6 +196,7 @@ void huskeylensInit() {
     gripper_closePOS();
     delay(100);
   }
+  gripper_openPOS();
 }
 
 //****************************** check NODE ******************************
@@ -252,7 +253,7 @@ void check_2NODE(int node_near, int node_far) {
       NODE_dataUpdate(node_near, 1);
     else
       NODE_dataUpdate(node_near, 2);
-  } else if (SQ_size >= 500 && SQ_size < 5000) {
+  } else if (SQ_size >= 100 && SQ_size < 5000) {
     NODE_dataUpdate(node_near, 0);
     int ObjCNT = ReturnObjectCNT();
     int CNT = 0;
@@ -615,10 +616,10 @@ void check_NODE59() {
 void check_NODE610() {
   Serial.println(F(">>> CHECK FUNC :: check_NODE6,10"));
   check_2NODE(NODE6, NODE10);
-  int N6 = NODE_dataReturn(NODE6);
-  int N10 = NODE_dataReturn(NODE10);
   NODE_PrintAll();   // ! 디버그용
   StopFor(1000000);  // ! 디버그용 멈춤
+  int N6 = NODE_dataReturn(NODE6);
+  int N10 = NODE_dataReturn(NODE10);
   switch (N6) {
     case 1:
       NODE_movement("6,5");
@@ -680,7 +681,6 @@ void check_NODE7() {
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void motorInit() {
   prizm.setMotorInvert(1, 1);
-
   prizm.setServoSpeed(1, 60);
   prizm.setServoSpeed(2, 60);
   prizm.setServoSpeed(3, 10);
@@ -961,7 +961,7 @@ void move_NEWS(int news) {
 void NODE_movement(String input) {
   Serial.print(F("[[ NODE_movement : "));
   Serial.print(input);
-  Serial.print(F(" ]]"));
+  Serial.println(F(" ]]"));
   movement_parsing(input);
   int movetotalCNT = moveCNT;
   while (moveCNT > 0) {

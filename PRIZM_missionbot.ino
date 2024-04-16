@@ -5,8 +5,8 @@ void setup() {
   prizm.PrizmBegin();
   Serial.begin(115200);
   Serial.print(F("\n\n[[[Setup Start]]]\n\n"));  // 세팅완료 메시지
-  motorInit();
   huskeylensInit();
+  motorInit();
   battVoltagePrint();
   linetrace_analogSetting(3.0, 60, 40, 35);
 

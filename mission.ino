@@ -154,10 +154,10 @@ void check_NODE59() {
 void check_NODE610() {
   Serial.println(F(">>> CHECK FUNC :: check_NODE6,10"));
   check_2NODE(NODE6, NODE10);
-  int N6 = NODE_dataReturn(NODE6);
-  int N10 = NODE_dataReturn(NODE10);
   NODE_PrintAll();   // ! 디버그용
   StopFor(1000000);  // ! 디버그용 멈춤
+  int N6 = NODE_dataReturn(NODE6);
+  int N10 = NODE_dataReturn(NODE10);
   switch (N6) {
     case 1:
       NODE_movement("6,5");

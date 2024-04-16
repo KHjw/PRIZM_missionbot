@@ -5,6 +5,7 @@ void huskeylensInit() {
     gripper_closePOS();
     delay(100);
   }
+  gripper_openPOS();
 }
 
 //****************************** check NODE ******************************
@@ -33,6 +34,7 @@ void check_1NODE_Far() {
 }
 
 void check_1NODE_Near() {
+  int SQ_size = ReturnSquareSize();
   int ObjCNT = ReturnObjectCNT();
   int CNT = 0;
   while (ObjCNT == 0) {
@@ -61,7 +63,7 @@ void check_2NODE(int node_near, int node_far) {
       NODE_dataUpdate(node_near, 1);
     else
       NODE_dataUpdate(node_near, 2);
-  } else if (SQ_size >= 500 && SQ_size < 5000) {
+  } else if (SQ_size >= 100 && SQ_size < 5000) {
     NODE_dataUpdate(node_near, 0);
     int ObjCNT = ReturnObjectCNT();
     int CNT = 0;

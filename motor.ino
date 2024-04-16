@@ -1,6 +1,5 @@
 void motorInit() {
   prizm.setMotorInvert(1, 1);
-
   prizm.setServoSpeed(1, 60);
   prizm.setServoSpeed(2, 60);
   prizm.setServoSpeed(3, 10);
