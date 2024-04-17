@@ -248,7 +248,7 @@ void move_Exit(int exitNode) {
           break;
         case RED:
           prizm.setMotorPowers(40, -40);
-          delay(300);
+          delay(280);
           StopFor(500);
           GoForward(60, 1900);
           break;

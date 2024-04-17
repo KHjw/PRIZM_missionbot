@@ -104,7 +104,6 @@ void check_2NODE(int node_near, int node_far) {
     NODE_dataUpdate(node_near, 0);
     NODE_dataUpdate(node_far, 0);
   }
-  ptrCurrentMode = NODE_PrintAll;
 }
 
 //****************************** object check ******************************

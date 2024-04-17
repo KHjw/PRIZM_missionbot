@@ -28,7 +28,7 @@ void linetrace_analog(int CNTmax) {
   int CNT = 0;
   while (1) {
     CNT++;
-    if (CNT <= CNTmax) break;
+    if (CNT >= CNTmax) break;
     Serial.print(F("linetrace_analog CNT : "));
     Serial.println(CNT);
     int irData = analogRead(A1);

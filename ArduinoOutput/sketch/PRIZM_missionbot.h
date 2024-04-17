@@ -10,6 +10,7 @@
 
 //****************************** system SETUP ******************************
 bool tf = false;
+bool isStupidMode = false;
 
 int target_object = 0;
 int false_object = 0;
@@ -18,9 +19,6 @@ int return_to = 0;
 #define detectSize 500
 
 PRIZM prizm;
-
-void (*ptrCurrentMode)();  // 현재모드 함수 포인터
-void (*ptrCheckMode)();    // 확인 함수 포인터
 
 // battry
 int battVoltage = 0;

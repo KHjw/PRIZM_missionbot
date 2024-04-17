@@ -45,12 +45,14 @@ void canGrab() {
 
 void canApproach() {
   if (!isCanGrab) {
+    Serial.print(F("can approach! / "));
     StopFor(100);
     int SQ_size = ReturnSquareSize();
-    if (SQ_size > detectSize) {
+    if (SQ_size > detectSize || prizm.readSonicSensorCM(4) <= canApproachCm) {
       Serial.println(SQ_size);
       Serial.println(F("!!!Can Approach!!!"));
       linetrace_analogSetting(0.7, 10, 40, 35);
+      intersectionCNT = 0;
       while (!isCanGrab && intersectionCNT == 0) {
         canGrab();
         if (!(NODE_dataReturn(NODE5) == 0 && NODE_dataReturn(NODE9) != 1))
@@ -90,7 +92,7 @@ void TurnLeft() {
 
 void TurnAround() {
   prizm.setMotorPowers(100, -100);
-  delay(1050);
+  delay(1000);
   prizm.setMotorPowers(125, 125);  // 정지
   TurnCalib();
 }
@@ -115,29 +117,4 @@ void TurnCalib() {
     StopFor(50);
   }
   intersectionCNT = 0;
-}
-
-//****************************** return home ******************************
-void return_from9() {
-  if (return_to == GREEN) {
-  } else if (return_to == RED) {
-  } else if (return_to == BLUE) {
-  }
-  // can drop
-}
-
-void return_from5() {
-  if (return_to == GREEN) {
-  } else if (return_to == RED) {
-  } else if (return_to == BLUE) {
-  }
-  // can drop
-}
-
-void return_from1() {
-  if (return_to == GREEN) {
-  } else if (return_to == RED) {
-  } else if (return_to == BLUE) {
-  }
-  // can drop
 }

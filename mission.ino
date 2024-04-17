@@ -8,7 +8,7 @@ void Get_Avoid_Return(int target_id, int false_id, int return_color) {
   switch (target_object) {
     case COLA:
       Serial.print(F("COLA"));
-      servo_maxDEG = 56;
+      servo_maxDEG = 58;
       canDetectCm = 3;
       break;
     case TEA:
@@ -70,22 +70,44 @@ void move_StartPos() {
 }
 
 void MissionStart_register() {
-	while(1){
-		int SQ_size = ReturnSquareSize();
-		int registerId = IdReturn();
-		if(SQ_size > 20000 && registerId != 0){
-			if(registerId == COLA)
-				Get_Avoid_Return(COLA, TEA, return_to);
-			else
-				Get_Avoid_Return(TEA, COLA, return_to);
-			break;
-		}
-	}
-	gripper_closePOS();
-	StopFor(300);
-	gripper_openPOS();
-	StopFor(3000);
-	MissionStart();
+  while (1) {
+    int SQ_size = ReturnSquareSize();
+    int registerId = IdReturn();
+    if (SQ_size > 20000 && registerId != 0) {
+      if (registerId == COLA)
+        Get_Avoid_Return(COLA, TEA, return_to);
+      else
+        Get_Avoid_Return(TEA, COLA, return_to);
+      break;
+    }
+  }
+  gripper_closePOS();
+  StopFor(300);
+  gripper_openPOS();
+  StopFor(3000);
+  MissionStart();
+}
+
+void Mission_Stupid() {
+  isStupidMode = true;
+  Serial.println(F("Stupid Mission Start!!!"));
+  move_StartPos();
+  // ? 이동
+  NODE_movement("2,3,7,11");
+  // ! 탈출
+  move_180();
+  prizm.setMotorPowers(100, -100);
+  delay(100);
+  currnetNEWS = WEST;
+  linetrace_analog(35);
+  TurnLeft();
+  currentNODE = NODE7;  // 현재 위치 저장
+  currnetNEWS = SOUTH;
+  NODE_movement("6,5");
+  // ? 도착
+  canDrop();
+  NODE_PrintAll();
+  StopFor(1000000);
 }
 
 //****************************** NODE check ******************************
@@ -94,7 +116,6 @@ void check_NODE3() {
   Serial.println(F(">>> CHECK FUNC :: check_NODE3"));
   StopFor(0);
   check_1NODE(NODE3);
-  // check_1NODE_Far();
   switch (NODE_dataReturn(NODE3)) {
     case 1:
       Serial.println(F("NODE3 1"));
@@ -191,20 +212,35 @@ void check_NODE610() {
       move_Exit(NODE9);
       break;
     case 0:
+      move_1node();
+      currentNODE = NODE6;  // 현재 위치 저장
+      currnetNEWS = EAST;   // 현재 방향 저장
       switch (N10) {
         case 1:
-          move_1node();
-          currentNODE = NODE6;  // 현재 위치 저장
-          currnetNEWS = EAST;   // 현재 방향 저장
           NODE_movement("10,9");
           move_Exit(NODE9);
           break;
         case 2:
-          NODE_movement("6,7,11,7,6,5");
+          move_left();
+          currnetNEWS = NORTH;
+          check_1NODE(NODE7);
+          if (NODE_dataReturn(NODE7) == 1)
+            NODE_movement("7,6,5");
+          else {
+            NODE_movement("7,11");
+            move_180();
+            prizm.setMotorPowers(100, -100);
+            delay(100);
+            currnetNEWS = WEST;
+            linetrace_analog(35);
+            TurnLeft();
+            currentNODE = NODE7;  // 현재 위치 저장
+            currnetNEWS = SOUTH;
+            NODE_movement("6,5");
+          }
           move_Exit(NODE5);
           break;
         case 0:
-          NODE_movement("6");
           move_left();
           currnetNEWS = NORTH;
           check_NODE7();
@@ -220,7 +256,6 @@ void check_NODE610() {
 
 void check_NODE7() {
   check_1NODE(NODE7);
-  // check_1NODE_Near();
   switch (NODE_dataReturn(NODE7)) {
     case 1:
       NODE_movement("7,6,5");
@@ -230,7 +265,11 @@ void check_NODE7() {
       GoForward(-40, 50);
       TurnRight();
       currnetNEWS = EAST;
-      NODE_movement("10,11");
+      NODE_movement("10");
+      move_left();
+      currentNODE = NODE11;
+      currnetNEWS = NORTH;
+      canApproach();
       GoForward(80, 200);
       move_180();
       currentNODE = NODE11;
