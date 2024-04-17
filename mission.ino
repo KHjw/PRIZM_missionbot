@@ -69,6 +69,25 @@ void move_StartPos() {
   StopFor(100);
 }
 
+void MissionStart_register() {
+	while(1){
+		int SQ_size = ReturnSquareSize();
+		int registerId = IdReturn();
+		if(SQ_size > 20000 && registerId != 0){
+			if(registerId == COLA)
+				Get_Avoid_Return(COLA, TEA, return_to);
+			else
+				Get_Avoid_Return(TEA, COLA, return_to);
+			break;
+		}
+	}
+	gripper_closePOS();
+	StopFor(300);
+	gripper_openPOS();
+	StopFor(3000);
+	MissionStart();
+}
+
 //****************************** NODE check ******************************
 void check_NODE3() {
   GoForward(100, 500);
