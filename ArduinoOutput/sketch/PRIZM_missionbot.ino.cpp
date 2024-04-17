@@ -61,7 +61,7 @@ void check_NODE3();
 void check_NODE59();
 #line 199 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE610();
-#line 257 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
+#line 263 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/mission.ino"
 void check_NODE7();
 #line 1 "/Users/kh_jinu/Desktop/응용로봇공/PRIZM_missionbot/motor.ino"
 void motorInit();
@@ -133,16 +133,16 @@ void setup() {
   battVoltagePrint();
   linetrace_analogSetting(3.0, 60, 40, 35);
 
-  Get_Avoid_Return(COLA, TEA, RED);  // 미션 세팅값
+  Get_Avoid_Return(TEA, COLA, BLUE);  // 미션 세팅값
 
   Serial.print(F("\n\n[[[Setup Finish]]]\n\n"));  // 세팅완료 메시지
 }
 
 void loop() {
   // battVoltagePrint(1000);
-  // setBattVoltage2(12.7);  // 정상작동 배터리 전압 12.8 ~ 12.2
+  setBattVoltage2(12.7);  // 정상작동 배터리 전압 12.8 ~ 12.2
 
-  MissionStart();
+  // MissionStart();
   // MissionStart_register();
   // Mission_Stupid();
 }
@@ -687,11 +687,17 @@ void check_NODE610() {
     case 1:
       NODE_movement("6,5");
       break;
-    case 2:
+    case 2:  // ! 목표 경로
       TurnLeft();
       currnetNEWS = NORTH;
-      NODE_movement("3,7,11,10,9");
-      move_Exit(NODE9);
+      NODE_movement("3,7,11,10,9,5,1");
+      move_left();
+      move_1node();
+      move_left();
+      move_1node();
+      prizm.setMotorPowers(40, -40);
+      delay(200);
+      // move_Exit(NODE9);
       break;
     case 0:
       move_1node();

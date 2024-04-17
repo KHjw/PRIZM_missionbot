@@ -205,11 +205,17 @@ void check_NODE610() {
     case 1:
       NODE_movement("6,5");
       break;
-    case 2:
+    case 2:  // ! 목표 경로
       TurnLeft();
       currnetNEWS = NORTH;
-      NODE_movement("3,7,11,10,9");
-      move_Exit(NODE9);
+      NODE_movement("3,7,11,10,9,5,1");
+      move_left();
+      move_1node();
+      move_left();
+      move_1node();
+      prizm.setMotorPowers(40, -40);
+      delay(200);
+      // move_Exit(NODE9);
       break;
     case 0:
       move_1node();
