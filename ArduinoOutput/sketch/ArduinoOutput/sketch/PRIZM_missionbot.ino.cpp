@@ -20,7 +20,7 @@ void setup() {
 
 void loop() {
   // battVoltagePrint(1000);
-  setBattVoltage2(12.7);  // 정상작동 배터리 전압 12.8 ~ 12.2
+  setBattVoltage2(12.65);  // 정상작동 배터리 전압 12.8 ~ 12.2
 
   // MissionStart();
   // MissionStart_register();
